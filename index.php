@@ -10,7 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <p>Social Design em desenvolvimento!</p>
+        <p>Social Design em desenvolvimento</p>
         <?php
         ?>
     </body>
