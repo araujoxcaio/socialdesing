@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Social Design</title>
+        <title>Social Home</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -52,19 +52,21 @@
                         <li>
                             <a class="page-scroll" href="#contact">Contato</a>
                         </li>
+                        <li>
+                            <a class="page-scroll" href="#contact">Perfil</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
         </nav>
-    <header>
+    <center><header>
             <div class="container">
-                    <div class="row">                     
+                    <div class="row">
                        <div class="header-content">
                             <div class="header-content-inner">
-                                <center>
-                                <form class="navbar-form navbar">
+                                <center><form class="navbar-form navbar">
                                     <input type="text" class="form-control" placeholder="Pesquisar...">
                                 </form>
                                 <a href="#download" class="btn btn-outline btn-xl">Pesquisar</a>
@@ -73,7 +75,7 @@
                         </div>
                     </div>
             </div>
-        </header>
+        </header></center>
 
         <section id="download" class="download bg-primary text-center">
             <div class="container">
