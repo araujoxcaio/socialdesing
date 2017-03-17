@@ -31,9 +31,6 @@
     <body id="page-top">
         <?php
         include 'interface/navbar.php';
-        include 'interface/header.php';
-        include 'interface/sobre.php';
-        include 'interface/novidades.php';
         include 'interface/comunidade.php';
         include 'interface/footer.php';
         ?>

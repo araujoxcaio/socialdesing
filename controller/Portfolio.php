@@ -1,16 +1,16 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Portfolio
- *
- * @author arauj
- */
 class Portfolio {
-    //put your code here
+    private $id_imagem;
+    private $nomedaimagem;
+    private $categoria;
+    private $descricaoimagem;
+    private $arquivo;
+}
+function construct($id_imagem, $nomedaimagem, $categoria, $descricaoimagem, $arquivo){
+    $this->ID_IMAGEM = $id_imagem;
+    $this->NOMEDAIMAGEM = $nomedaimagem;
+    $this->CATEGORIA = $categoria;
+    $this->DESCRICAOIMAGEM = $descricaoimagem;
+    $this->ARQUIVO = $arquivo;
 }

@@ -1,16 +1,54 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Fisica
- *
- * @author arauj
- */
-class Fisica {
-    //put your code here
+class Fisica extends Pessoa {
+    private $cpf;
+    private $descricaousuario;
 }
+function construct($cpf, $nome, $nomeusuario, $email, $endereco, $telefone, $senha, $descricaousuario){
+    $this->CPF = $cpf;
+    $this->NOME = $nome;
+    $this->NOMEUSUARIO = $nomeusuario;
+    $this->EMAIL = $email;
+    $this->ENDERECO = $endereco;
+    $this->TELEFONE = $telefone;
+    $this->SENHA = $senha;
+    $this->DESCRICAOUSUARIO = $descricaousuario;
+}
+function cadastrarUsuario(){
+    
+}
+function loginFisico(){
+    
+}
+function editarPerfilInscrito(){
+    
+}
+function inserirImagem(){
+    
+}
+function editarImagem(){
+    
+}
+function excluirImagem(){
+    
+}
+function inserirProduto(){
+    
+}
+function editarProduto(){
+    
+}
+function comprarProduto(){
+    
+}
+function excluirProduto(){
+    
+}
+function pesquisarVaga(){
+    
+}
+function candidatarVaga(){
+    
+}
+
+
