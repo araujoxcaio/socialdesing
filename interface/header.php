@@ -12,14 +12,14 @@
                             </div>
        
                             <div class="col-md-4">
-                                    <br><a href="cadastro.php"><img class="img-responsive" src="http://placehold.it/200x200" alt=""></a>
+                                    <br><a href="cadastrousuario.php"><img class="img-responsive" src="http://placehold.it/200x200" alt=""></a>
                                     <br>
                                     <a href="cadastrousuario.php" class="btn btn-outline btn-xl">Cadastro</a><br>
                             </div>
                             <div class="col-md-4">
-                                    <br><a href="cadastro.php"><img class="img-responsive" src="http://placehold.it/200x200" alt=""></a>
+                                    <br><a href="cadastroempresa.php"><img class="img-responsive" src="http://placehold.it/200x200" alt=""></a>
                                     <br>
-                                    <a href="empresas.php" class="btn btn-outline btn-xl">Empresas</a><br>
+                                    <a href="cadastroempresa.php" class="btn btn-outline btn-xl">Empresas</a><br>
                             </div>        
                                 </div></center>
                         </div>    

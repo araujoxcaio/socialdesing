@@ -451,6 +451,11 @@ body {
 .form{
     width: 50%;   
 }
+.container .row .formcadastro{
+    width: 50%;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
 .container .row .header-content .apresentation{
     padding-top: 100px;
 }

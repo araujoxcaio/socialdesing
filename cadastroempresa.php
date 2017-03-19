@@ -31,7 +31,7 @@
     <body id="page-top">
         <?php
         include 'interface/navbar.php';
-        include 'interface/formusuario.php';
+        include 'interface/formempresa.php';
         include 'interface/comunidade.php';
         include 'interface/footer.php';
         ?>
