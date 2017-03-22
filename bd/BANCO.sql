@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 19-Mar-2017 às 22:29
+-- Generation Time: 23-Mar-2017 às 00:18
 -- Versão do servidor: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -33,7 +33,7 @@ CREATE TABLE `imagem` (
   `CATEGORIA` varchar(50) NOT NULL,
   `URL` varchar(50) NOT NULL,
   `DATA_UPLOAD` date NOT NULL,
-  `USUARIO_UPLOAD` int(10) NOT NULL
+  `ID_PESSOA` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -68,7 +68,7 @@ CREATE TABLE `produto` (
   `URL_IMAGEM` varchar(50) NOT NULL,
   `URL_ARQUIVO` varchar(50) NOT NULL,
   `DATA_UPLOAD` date NOT NULL,
-  `USUARIO_UPLOAD` int(10) NOT NULL
+  `ID_PESSOA` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -85,7 +85,7 @@ CREATE TABLE `vaga` (
   `CATEGORIA` varchar(50) NOT NULL,
   `LOCALIZACAO` varchar(100) DEFAULT NULL,
   `DATA_VAGA` date NOT NULL,
-  `USUARIO_VAGA` int(10) NOT NULL
+  `ID_PESSOA` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `vaga` (
 --
 ALTER TABLE `imagem`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_USUARIO` (`USUARIO_UPLOAD`);
+  ADD KEY `FK_USUARIO` (`ID_PESSOA`);
 
 --
 -- Indexes for table `pessoa`
@@ -110,14 +110,14 @@ ALTER TABLE `pessoa`
 --
 ALTER TABLE `produto`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_USUARIO_PRODUTO` (`USUARIO_UPLOAD`);
+  ADD KEY `FK_USUARIO_PRODUTO` (`ID_PESSOA`);
 
 --
 -- Indexes for table `vaga`
 --
 ALTER TABLE `vaga`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_USUARIO_VAGA` (`USUARIO_VAGA`);
+  ADD KEY `FK_USUARIO_VAGA` (`ID_PESSOA`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -127,12 +127,12 @@ ALTER TABLE `vaga`
 -- AUTO_INCREMENT for table `imagem`
 --
 ALTER TABLE `imagem`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `produto`
 --
@@ -151,19 +151,19 @@ ALTER TABLE `vaga`
 -- Limitadores para a tabela `imagem`
 --
 ALTER TABLE `imagem`
-  ADD CONSTRAINT `FK_USUARIO` FOREIGN KEY (`USUARIO_UPLOAD`) REFERENCES `pessoa` (`ID`);
+  ADD CONSTRAINT `FK_USUARIO` FOREIGN KEY (`ID_PESSOA`) REFERENCES `pessoa` (`ID`);
 
 --
 -- Limitadores para a tabela `produto`
 --
 ALTER TABLE `produto`
-  ADD CONSTRAINT `FK_USUARIO_PRODUTO` FOREIGN KEY (`USUARIO_UPLOAD`) REFERENCES `pessoa` (`ID`);
+  ADD CONSTRAINT `FK_USUARIO_PRODUTO` FOREIGN KEY (`ID_PESSOA`) REFERENCES `pessoa` (`ID`);
 
 --
 -- Limitadores para a tabela `vaga`
 --
 ALTER TABLE `vaga`
-  ADD CONSTRAINT `FK_USUARIO_VAGA` FOREIGN KEY (`USUARIO_VAGA`) REFERENCES `pessoa` (`ID`);
+  ADD CONSTRAINT `FK_USUARIO_VAGA` FOREIGN KEY (`ID_PESSOA`) REFERENCES `pessoa` (`ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
