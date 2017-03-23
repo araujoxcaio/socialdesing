@@ -1,3 +1,5 @@
+
+
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -24,10 +26,10 @@
                         <ul id="login-dp" class="dropdown-menu">
                             <li>   
                                 <div id="formrow" class="row">
-                                    <form class="formlogin" name="login" action="home.php" method="POST" accept-charset="UTF-8">
+                                    <form class="formlogin" name="login" action="efetuarlogin.php" method="POST" accept-charset="UTF-8">
                                         <div class="form-group">
                                             <label class="sr-only">Usuário</label>
-                                            <input type="text" name="nomeusuario" class="form-control" id="nomeusuario" placeholder="usuario" required>
+                                            <input type="text" name="username" class="form-control" id="nomeusuario" placeholder="usuario" required>
                                         </div>
                                         <div class="form-group">
                                         <label class="sr-only">Senha</label>
