@@ -16,9 +16,28 @@
             echo"<script language='javascript' type='text/javascript'>alert('Login e/ou Senha incorretos. Tente novamente');window.location.href='../login.php';</script>";
             die();
           }else{
-            $_SESSION['email'] = $email;
+            $_SESSION['email'] = $email;			
             $_SESSION['senha'] = $password;
-            header("Location:../index.php");
+			
+			//pegando os outros dados e jogando na sessão
+			$result = mysql_query("SELECT ID, NOME, CPF_CNPJ, FISICA_JURIDICA, TELEFONE, DATA_CADASTRO FROM PESSOA WHERE EMAIL = '$email' AND SENHA = '$password'");
+			while ($row = mysql_fetch_array($result, MYSQL_BOTH)) {
+				$id = $row["ID"];
+				$nome = $row["NOME"];
+				$cpf_cnpj = $row["CPF_CNPJ"];
+				$fisica_juridica = $row["FISICA_JURIDICA"];
+				$telefone = $row["TELEFONE"];
+				$data_cadastro = $row["DATA_CADASTRO"];
+			}
+			
+			$_SESSION['id'] = $id;
+			$_SESSION['nome'] = $nome;
+			$_SESSION['cpf_cnpj'] = $cpf_cnpj;
+			$_SESSION['fisica_juridica'] = $fisica_juridica;
+			$_SESSION['telefone'] = $telefone;
+			$_SESSION['data_cadastro'] = $data_cadastro;		
+			
+			header("Location:../index.php");
           }
       }
 ?>
