@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26-Mar-2017 às 20:53
+-- Generation Time: 27-Mar-2017 às 15:01
 -- Versão do servidor: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -58,7 +58,7 @@ CREATE TABLE `pessoa` (
 --
 
 INSERT INTO `pessoa` (`ID`, `NOME`, `CPF_CNPJ`, `FISICA_JURIDICA`, `TELEFONE`, `EMAIL`, `SENHA`, `DATA_CADASTRO`) VALUES
-(1, 'Administrador', '000.000.000-00', 'F', '(00) 00000-0000', 'admin', 'admin', '2017-03-26');
+(1, 'Administrador', '000.000.000-00', 'F', '(00) 00000-0000', 'admin@admin.com', 'e10adc3949ba59abbe56e057f20f883e', '2017-03-26');
 
 -- --------------------------------------------------------
 
@@ -138,7 +138,7 @@ ALTER TABLE `imagem`
 -- AUTO_INCREMENT for table `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `produto`
 --
