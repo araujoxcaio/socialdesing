@@ -39,7 +39,7 @@
                 <center>
                 <div class="formcadastro">  
                     <h1> Login </h1>
-                    <form class="formlogin" name="login" action="http://localhost/SocialDesign/interface/efetuarlogin.php" method="POST" accept-charset="UTF-8"><!--ALTERAR O LINK-->
+                    <form class="formlogin" name="login" action="http://localhost/SocialDesign/interface/efetuarlogin.php" method="POST" accept-charset="UTF-8"><!-- ALTERAR O LINK-->
                         <div class="form-group">
                             <label for="Email">E-mail</label>
                             <input type="email" class="form-control" name="email" placeholder="user@domain.com" value="" />

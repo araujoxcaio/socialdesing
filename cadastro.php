@@ -37,7 +37,7 @@
             $msg = "Por favor, preencha todos os campos.";
         } 
         
-        //caso não tenha, insere os dados no banco
+        //caso esteja tudo ok, insere os dados no banco
         else{        
             $sql = "INSERT INTO PESSOA (CPF_CNPJ, FISICA_JURIDICA, EMAIL, SENHA, DATA_CADASTRO) VALUES ('$cpf_cnpj', '$fj', '$email', '$senha', NOW())";
             if($mysqli->query($sql)){

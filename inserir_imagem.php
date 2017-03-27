@@ -1,6 +1,9 @@
 <?php 
     include("interface/conexao.php");
+    
     session_start();
+    
+    //verificando se está logado
     if(!isset($_SESSION["email"])){
         header("Location: login.php");
         exit;        
