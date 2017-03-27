@@ -132,6 +132,7 @@
                                 <label>Senha</label>
                                 <input type="password" class="form-control" name="f_senha" placeholder="Digite sua senha com no mínimo 6 caracteres" value="" minlength="6" />
                             </div>
+							Todos os campos são obrigatórios!<br><br>
                             <input class="btn btn-primary" type="submit" name="f_submit" value="Cadastrar" />
                             <a href="index.php" class="btn btn-info">Voltar</a>
                         </div>
