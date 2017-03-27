@@ -1,5 +1,10 @@
 <?php 
     include("interface/conexao.php");
+    session_start();
+    if(!isset($_SESSION["email"])){
+        header("Location: login.php");
+        exit;        
+    }
     
     	error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
        
@@ -18,7 +23,7 @@
 	if ($arquivo) { 
             
 	    // Verifica se o mime-type do arquivo é de imagem
-	    if (!eregi("^image\/(pjpeg|jpeg|png|gif|jpg|svg|bmp)$", $arquivo["type"]) || $arquivo["size"] > $config["tamanho"]) {
+	    if (!preg_match("#^image\/(pjpeg|jpeg|png|gif|jpg|svg|bmp)$#", $arquivo["type"]) || $arquivo["size"] > $config["tamanho"]) {
 	        $erro = "Arquivo inválido! A imagem deve ser nas extensões jpg, jpeg, bmp, gif, png ou svg e conter no máximo 5MB.";
 	    }         
 

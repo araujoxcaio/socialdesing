@@ -1,4 +1,5 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
+
     <html lang="en">
 
     <head>
@@ -26,14 +27,38 @@
 
         <!-- Theme CSS -->
         <link href="css/socialdesign.css" rel="stylesheet">
+
     </head>
 
     <body id="page-top">
-        <?php
-        include 'interface/navbar.php';        
-        include 'interface/novidades.php';
-        include 'interface/footer.php';
-        ?>
+        <?php include 'interface/navbar.php'; ?>
+        <header>
+        <div class="container">    
+            <div class="row">  
+                <div class="col-md-12">
+                <center>
+                <div class="formcadastro">  
+                    <h1> Login </h1>
+                    <form class="formlogin" name="login" action="http://localhost/SocialDesign/interface/efetuarlogin.php" method="POST" accept-charset="UTF-8"><!--ALTERAR O LINK-->
+                        <div class="form-group">
+                            <label for="Email">E-mail</label>
+                            <input type="email" class="form-control" name="email" placeholder="user@domain.com" value="" />
+                        </div>                        
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" class="form-control" name="password" placeholder="Digite sua senha com no mínimo 6 caracteres" value="" minlength="6" />
+                        </div>
+                        <input class="btn btn-primary" type="submit" name="entrar" value="Entrar" /><br><br>
+                        <a href="cadastro.php" class="btn btn-info">Criar uma conta</a>                        
+                    </form>                    
+                </div>
+                </center>        
+                </div>
+            </div>
+        </div>
+        </header>
+        <?php include 'interface/comunidade.php';
+        include 'interface/footer.php'; ?>
 
         <!-- jQuery -->
         <script src="lib/jquery/jquery.min.js"></script>

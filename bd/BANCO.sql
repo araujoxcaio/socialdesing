@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 23-Mar-2017 às 00:18
+-- Generation Time: 26-Mar-2017 às 20:53
 -- Versão do servidor: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -45,14 +45,20 @@ CREATE TABLE `imagem` (
 CREATE TABLE `pessoa` (
   `ID` int(10) NOT NULL,
   `NOME` varchar(100) NOT NULL,
-  `CPF_CNPJ` varchar(14) NOT NULL,
+  `CPF_CNPJ` varchar(18) NOT NULL,
   `FISICA_JURIDICA` varchar(1) NOT NULL,
   `TELEFONE` varchar(15) NOT NULL,
   `EMAIL` varchar(100) NOT NULL,
-  `USERNAME` varchar(50) NOT NULL,
   `SENHA` varchar(50) NOT NULL,
   `DATA_CADASTRO` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `pessoa`
+--
+
+INSERT INTO `pessoa` (`ID`, `NOME`, `CPF_CNPJ`, `FISICA_JURIDICA`, `TELEFONE`, `EMAIL`, `SENHA`, `DATA_CADASTRO`) VALUES
+(1, 'Administrador', '000.000.000-00', 'F', '(00) 00000-0000', 'admin', 'admin', '2017-03-26');
 
 -- --------------------------------------------------------
 
@@ -127,12 +133,12 @@ ALTER TABLE `vaga`
 -- AUTO_INCREMENT for table `imagem`
 --
 ALTER TABLE `imagem`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `produto`
 --
