@@ -33,9 +33,15 @@
                             <li>   
                                 <div id='formrow' class='row'>
                                     <div class='formlogin'><br>
+                                    
                                         <div class='form-group'>
                                             <a href='perfil.php'><input type='submit' name='perfil' class='btn btn-outline btn-block' value='Editar Perfil'></a>
                                         </div>
+                                        
+                                        <div class='form-group'>
+                                            <a href='portfolio.php'><input type='submit' name='perfil' class='btn btn-outline btn-block' value='Meu Portfólio'></a>
+                                        </div>
+                                        
                                         <div class='form-group'>
                                             <a href='interface/efetuarlogout.php'><input type='submit' name='logout' class='btn btn-outline btn-block' value='Fazer Logout'></a>
                                         </div>

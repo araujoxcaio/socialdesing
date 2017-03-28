@@ -4,17 +4,64 @@
     $connect = mysql_connect('localhost','root','');
     $db = mysql_select_db('u619293682_sodes');
 	
-	error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 
     session_start();
 	
-	//verificando se está logado
+    //verificando se está logado
     if(!isset($_SESSION["email"])){
         header("Location: login.php");
         exit;        
     }
-	
-	$msg = '';
+    
+    //iniciando as variáveis da sessão
+    $email = $_SESSION['email'];
+    $senha = $_SESSION['password'];
+    $id = $_SESSION['id'];
+    $nome = $_SESSION['nome'];
+    $cpf_cnpj = $_SESSION['cpf_cnpj'];
+    $fisica_juridica = $_SESSION['fisica_juridica'];
+    $telefone = $_SESSION['telefone'];
+    $data_cadastro = $_SESSION['data_cadastro'];
+    
+    if($fisica_juridica == 'F'){
+        $post_cpf = $_POST['cpf'];  
+        $post_email = $_POST['f_email'];
+        $post_nome = $_POST['f_nome'];
+        $post_senha = md5($_POST['f_senha']);  
+        $post_telefone = $_POST['f_telefone'];  
+        $post_salvar = $_POST['f_submit'];
+    }
+    if($fisica_juridica == 'J'){
+        $post_cpf = $_POST['cnpj'];  
+        $post_email = $_POST['j_email'];
+        $post_nome = $_POST['j_nome'];
+        $post_senha = md5($_POST['j_senha']);  
+        $post_telefone = $_POST['j_telefone'];  
+        $post_salvar = $_POST['j_submit'];
+    }
+    
+    if(isset($post_salvar)){
+        //update mysql
+        $update = mysql_query("UPDATE PESSOA SET NOME = '$post_nome', TELEFONE = '$post_telefone', SENHA = '$post_senha' WHERE ID = '$id'");            
+        if(!$update){
+            $msg = "Erro ao gravar os dados no banco de dados: " . mysql_error();
+        }
+        $msg = "Dados alterados com sucesso!<br><br>";
+        
+        //atualizando os valores da sessão
+        if($fisica_juridica == 'F'){
+            $_SESSION['nome'] = $_POST['f_nome'];
+            $_SESSION['telefone'] = $_POST['f_telefone'];            
+        }        
+        if($fisica_juridica == 'J'){
+            $_SESSION['nome'] = $_POST['j_nome'];
+            $_SESSION['telefone'] = $_POST['j_telefone'];  
+        }        
+        $nome = $_SESSION['nome'];
+        $telefone = $_SESSION['telefone'];
+        
+    }
 	
 	
 ?>
@@ -49,7 +96,7 @@
         <!-- Theme CSS -->
         <link href="css/socialdesign.css" rel="stylesheet">
 
-		<script>       
+	<script>       
         //máscaras
         function formatar(mascara, documento){
         var i = documento.value.length;
@@ -72,93 +119,81 @@
                 <center>
                 <div class="formcadastro">  
                     <h1> Editar Perfil </h1>
-					<?php if($_SESSION['fisica_juridica'] == 'F'){
-                            $email = $_SESSION['email'];
-							$senha = $_SESSION['password'];
-							$id = $_SESSION['id'];
-							$nome = $_SESSION['nome'];
-							$cpf_cnpj = $_SESSION['cpf_cnpj'];
-							$fisica_juridica = $_SESSION['fisica_juridica'];
-							$telefone = $_SESSION['telefone'];
-							$data_cadastro = $_SESSION['data_cadastro'];
-                            echo "
-							<form action='perfil.php' method='POST' name='formcadastro'>	
-							
-								<div class='form-group'>
-									<label for='CPF'>CPF</label>
-									<input type='text' class='form-control' name='cpf_cnpj' value='$cpf_cnpj' disabled />
-								</div>  
-								
-								<div class='form-group'>
-									<label for='Email'>E-mail</label>
-									<input type='email' class='form-control' name='email' value='$email' disabled />
-								</div> 
+			<?php if($_SESSION['fisica_juridica'] == 'F'){
+                            
+                        echo "
+                            <form action='perfil.php' method='POST'>	
 
-								<div class='form-group'>
-									<label for='nome'>Nome completo</label>
-									<input type='text' class='form-control' name='nome' value='$nome' />
-								</div> 	
-								
-								<div class='form-group'>
-									<label for='senha'>Senha</label>
-									<input type='text' class='form-control' name='senha' value='' required />
-								</div>
+                                <div class='form-group'>
+                                        <label for='CPF'>CPF</label>
+                                        <input type='text' class='form-control' name='cpf' value='$cpf_cnpj' disabled />
+                                </div>  
 
-								<div class='form-group'>
-									<label for='telefone'>Telefone</label>
-									<input type='text' class='form-control' name='telefone' OnKeyPress='formatar('##-#####-####', this)' value='$telefone' />
-								</div><br>									
-								
-								<input class='btn btn-primary' type='submit' name='f_submit' value='Salvar Alterações' />
-								<input class='btn btn-danger' type='submit' name='excluir' value='Excluir Perfil' /><br>
+                                <div class='form-group'>
+                                        <label for='Email'>E-mail</label>
+                                        <input type='email' class='form-control' name='f_email' value='$email' disabled />
+                                </div> 
 
-							</form>        
-							";
-					} ?>      
+                                <div class='form-group'>
+                                        <label for='nome'>Nome completo</label>
+                                        <input type='text' class='form-control' name='f_nome' value='$nome' />
+                                </div> 	
 
-					<?php if($_SESSION['fisica_juridica'] == 'J'){
-                            $email = $_SESSION['email'];
-							$senha = $_SESSION['password'];
-							$id = $_SESSION['id'];
-							$nome = $_SESSION['nome'];
-							$cpf_cnpj = $_SESSION['cpf_cnpj'];
-							$fisica_juridica = $_SESSION['fisica_juridica'];
-							$telefone = $_SESSION['telefone'];
-							$data_cadastro = $_SESSION['data_cadastro'];
-                            echo "
-							<form action='perfil.php' method='POST' name='formcadastro'>	
-							
-								<div class='form-group'>
-									<label for='CNPJ'>CNPJ</label>
-									<input type='text' class='form-control' name='cpf_cnpj' value='$cpf_cnpj' disabled />
-								</div>  
-								
-								<div class='form-group'>
-									<label for='Email'>E-mail</label>
-									<input type='email' class='form-control' name='email' value='$email' disabled />
-								</div> 
+                                <div class='form-group'>
+                                        <label for='senha'>Senha</label>
+                                        <input type='password' class='form-control' name='f_senha' value='' required />
+                                </div>
 
-								<div class='form-group'>
-									<label for='nome'>Nome completo</label>
-									<input type='text' class='form-control' name='nome' value='$nome' />
-								</div> 	
-								
-								<div class='form-group'>
-									<label for='senha'>Senha</label>
-									<input type='text' class='form-control' name='senha' value='' required />
-								</div>
+                                <div class='form-group'>
+                                        <label for='telefone'>Telefone</label>
+                                        <input type='text' class='form-control' name='f_telefone' OnKeyPress=\"formatar('## ####-#####', this)\" value='$telefone' maxlength='13' />
+                                </div><br>									
+                                
+                                $msg
 
-								<div class='form-group'>
-									<label for='telefone'>Telefone</label>
-									<input type='text' class='form-control' name='telefone' OnKeyPress='formatar('##-#####-####', this)' value='$telefone' />
-								</div><br>									
-								
-								<input class='btn btn-primary' type='submit' name='f_submit' value='Salvar Alterações' />
-								<input class='btn btn-danger' type='submit' name='excluir' value='Excluir Perfil' /><br>
+                                <input class='btn btn-primary' type='submit' name='f_submit' value='Salvar Alterações' />
 
-							</form>        
-							";
-					} ?> 					
+                            </form>        
+                        ";
+                        } ?>
+
+			<?php if($_SESSION['fisica_juridica'] == 'J'){
+                            
+                        echo "
+                            <form action='perfil.php' method='POST'>	
+
+                                <div class='form-group'>
+                                        <label for='CNPJ'>CNPJ</label>
+                                        <input type='text' class='form-control' name='CNPJ' value='$cpf_cnpj' disabled />
+                                </div>  
+
+                                <div class='form-group'>
+                                        <label for='Email'>E-mail</label>
+                                        <input type='email' class='form-control' name='j_email' value='$email' disabled />
+                                </div> 
+
+                                <div class='form-group'>
+                                        <label for='nome'>Nome completo</label>
+                                        <input type='text' class='form-control' name='j_nome' value='$nome' />
+                                </div> 	
+
+                                <div class='form-group'>
+                                        <label for='senha'>Senha</label>
+                                        <input type='password' class='form-control' name='j_senha' value='' required />
+                                </div>
+
+                                <div class='form-group'>
+                                        <label for='telefone'>Telefone</label>
+                                        <input type='text' class='form-control' name='j_telefone' OnKeyPress=\"formatar('## ####-#####', this)\" value='$telefone' maxlength='13' />
+                                </div><br>									
+                                
+                                $msg
+
+                                <input class='btn btn-primary' type='submit' name='j_submit' value='Salvar Alterações' />
+
+                            </form>        
+                        ";
+                        } ?>                     
                 </div>
                 </center>        
                 </div>
