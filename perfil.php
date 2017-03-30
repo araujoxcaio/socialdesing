@@ -5,6 +5,7 @@
     //ignorando "notices"
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 
+    //iniciando a sessão
     session_start();
 	
     //verificando se está logado
@@ -13,9 +14,9 @@
         exit;        
     }
     
-    //iniciando as variáveis da sessão
+    //jogando os valores da sessão em variáveis
     $email = $_SESSION['email'];
-    $senha = $_SESSION['password'];
+    $senha = $_SESSION['senha'];
     $id = $_SESSION['id'];
     $nome = $_SESSION['nome'];
     $cpf_cnpj = $_SESSION['cpf_cnpj'];
@@ -23,6 +24,7 @@
     $telefone = $_SESSION['telefone'];
     $data_cadastro = $_SESSION['data_cadastro'];
     
+    //verificando se a pessoa é física ou jurídica
     if($fisica_juridica == 'F'){
         $post_cpf = $_POST['cpf'];  
         $post_email = $_POST['f_email'];
@@ -40,15 +42,16 @@
         $post_salvar = $_POST['j_submit'];
     }
     
+    //verificando se o botão salvar foi acionado
     if(isset($post_salvar)){
-        //update mysql
+        //update no banco de dados
         $update = $mysqli->query("UPDATE PESSOA SET NOME = '$post_nome', TELEFONE = '$post_telefone', SENHA = '$post_senha' WHERE ID = '$id'");            
         if(!$update){
             $msg = "Erro ao gravar os dados no banco de dados ";
         }
         $msg = "Dados alterados com sucesso!<br><br>";
         
-        //atualizando os valores da sessão
+        //atualizando os valores da sessão e suas variáveis
         if($fisica_juridica == 'F'){
             $_SESSION['nome'] = $_POST['f_nome'];
             $_SESSION['telefone'] = $_POST['f_telefone'];            
@@ -117,7 +120,7 @@
                 <div class="col-md-12">
                 <center>
                 <div class="formcadastro">  
-                    <h1> Editar Perfil </h1>
+                    <h1> Editar Perfil <?php echo $fisica_juridica ?></h1>
 			<?php if($_SESSION['fisica_juridica'] == 'F'){
                             
                         echo "

@@ -27,7 +27,7 @@
 			
             //pegando os outros dados e jogando na sessão
             $result = $mysqli->query("SELECT ID, NOME, CPF_CNPJ, FISICA_JURIDICA, TELEFONE, DATA_CADASTRO FROM PESSOA WHERE EMAIL = '$email' AND SENHA = '$password'");
-            while ($row = mysqli_fetch_array($result, MYSQL_BOTH)){
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)){
                 $id = $row["ID"];
                 $nome = $row["NOME"];
                 $cpf_cnpj = $row["CPF_CNPJ"];
