@@ -39,7 +39,7 @@
                                         </div>
                                         
                                         <div class='form-group'>
-                                            <a href='portfolio.php'><input type='submit' name='perfil' class='btn btn-outline btn-block' value='Meu Portfólio'></a>
+                                            <a href='inserir_imagem.php'><input type='submit' name='perfil' class='btn btn-outline btn-block' value='Meu Portfólio'></a>
                                         </div>
                                         
                                         <div class='form-group'>

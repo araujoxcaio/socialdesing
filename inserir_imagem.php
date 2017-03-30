@@ -14,6 +14,7 @@
         $nome = $_POST['nome'];
 	$descricao = $_POST['descricao'];
 	$categoria = $_POST['categoria'];
+        $id = $_SESSION['id'];
 
 	// Prepara a variável do arquivo
 	$arquivo = isset($_FILES["foto"]) ? $_FILES["foto"] : FALSE;
@@ -26,15 +27,15 @@
 	if ($arquivo) { 
             
 	    // Verifica se o mime-type do arquivo é de imagem
-	    if (!preg_match("#^image\/(pjpeg|jpeg|png|gif|jpg|svg|bmp)$#", $arquivo["type"]) || $arquivo["size"] > $config["tamanho"]) {
-	        $erro = "Arquivo inválido! A imagem deve ser nas extensões jpg, jpeg, bmp, gif, png ou svg e conter no máximo 5MB.";
+	    if (!preg_match("#^image\/(pjpeg|jpeg|png|gif|jpg)$#", $arquivo["type"]) || $arquivo["size"] > $config["tamanho"]) {
+	        $erro = "Arquivo inválido! A imagem deve ser nas extensões jpg, jpeg, gif, png e conter no máximo 5MB.";
 	    }         
 
 	    // Verificação de dados OK, nenhum erro ocorrido, executa então o upload...
 	    else
 	    {
 	        // Pega extensão do arquivo
-	        preg_match("/\.(gif|bmp|png|jpg|jpeg|svg){1}$/i", $arquivo["name"], $ext);
+	        preg_match("/\.(bmp|png|jpg|jpeg){1}$/i", $arquivo["name"], $ext);
 
 	        // Gera um nome único para a imagem
 	        $imagem_nome = md5(uniqid(time())) . "." . $ext[1];
@@ -44,7 +45,7 @@
 
 	        // Faz o upload da imagem
 	        move_uploaded_file($arquivo["tmp_name"], $imagem_dir);
-			$sql_code = "INSERT INTO IMAGEM (NOME, DESCRICAO, CATEGORIA, URL, DATA_UPLOAD, ID_PESSOA) VALUES ('$nome', '$descricao', '$categoria', '$imagem_nome', NOW(), '1')"; //MUDAR O ID
+			$sql_code = "INSERT INTO IMAGEM (NOME, DESCRICAO, CATEGORIA, URL, DATA_UPLOAD, ID_PESSOA) VALUES ('$nome', '$descricao', '$categoria', '$imagem_nome', NOW(), '$id')";
 			if($mysqli->query($sql_code)){
 				$msg = "Arquivo enviado com sucesso!";
 			}
@@ -130,16 +131,35 @@
                             <div class="form-group">
                                 <label for="nome">Nome da imagem</label>
                                 <input type="text" class="form-control" name="nome" required />
-                            </div>  
+                            </div> 
+                        
                             <div class="form-group">
                                 <label for="descricao">Descrição</label>
                                 <input type="text" class="form-control" name="descricao" value="" required />
-                            </div>                        
+                            </div>  
+                        
                             <div class="form-group">
                                 <label>Categoria</label>
-                                <input type="text" class="form-control" name="categoria" value="" />
+                                <select name='categoria'>
+                                    <option value='Arte digital'>Arte digital</option>
+                                    <option value='Arte tradicional'>Arte tradicional</option>
+                                    <option value='Artesanato'>Artesanato</option>
+                                    <option value='Cartoons & Comics'>Cartoons & Comics</option>
+                                    <option value='Concursos'>Concursos</option>
+                                    <option value='Desenhos e Interfaces'>Desenhos e Interfaces</option>
+                                    <option value='Filmes e Animações'>Filmes e Animações</option>
+                                    <option value='Fotografia'>Fotografia</option>
+                                    <option value='Literatura'>Literatura</option>
+                                    <option value='Livros de movimento'>Livros de movimento</option>
+                                    <option value='Manga e Anime'>Manga e Anime</option>
+                                    <option value='Personalização'>Personalização</option>
+                                    <option value='Projetos Comunitários'>Projetos Comunitários</option>
+                                    <option value='Revistas'>Revistas</option>
+                                </select>
+
                             </div>
-							<div class="form-group">
+                            
+                            <div class="form-group">
                                 <label>Selecione a imagem</label>
                                 <input type="file" class="form-control"  name="foto" required />
                             </div>
