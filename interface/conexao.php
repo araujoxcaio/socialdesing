@@ -1,22 +1,22 @@
 <?php
         /* CONEXÃO COM O HOSTINGER:
-	
-        $host = "mysql.hostinger.com.br";
-	$usuario = "u619293682_admin";
-	$senha = "doritos";
-	$bd = "u619293682_sodes";
+
+        $mysqli = mysqli_connect("mysql.hostinger.com.br", "u619293682_admin", "doritos", "u619293682_sodes");
+
+        if (mysqli_connect_errno()) {
+            printf("Falha na conexão com o banco de dados: %s\n", mysqli_connect_error());
+            exit();
+        }
 
         */
 
         // CONEXÃO COM O XAMPP:
-        $host = "localhost";
-	$usuario = "root";
-	$senha = "";
-	$bd = "u619293682_sodes";    
+        $mysqli = mysqli_connect("localhost", "root", "", "u619293682_sodes");
 
-	$mysqli = new mysqli($host, $usuario, $senha, $bd);
-
-	if($mysqli->connect_errno)
-		echo "Falha na conexão: (".$mysqli->connect_errno.") ".$mysqli->connect_error;
+        if (mysqli_connect_errno()) {
+            printf("Falha na conexão com o banco de dados: %s\n", mysqli_connect_error());
+            exit();
+        }
+		
 
 ?>

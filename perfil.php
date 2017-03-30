@@ -1,9 +1,8 @@
 <?php
-
+    //include da conexão com o banco de dados
     include("interface/conexao.php");
-    $connect = mysql_connect('localhost','root','');
-    $db = mysql_select_db('u619293682_sodes');
-	
+    
+    //ignorando "notices"
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 
     session_start();
@@ -43,9 +42,9 @@
     
     if(isset($post_salvar)){
         //update mysql
-        $update = mysql_query("UPDATE PESSOA SET NOME = '$post_nome', TELEFONE = '$post_telefone', SENHA = '$post_senha' WHERE ID = '$id'");            
+        $update = $mysqli->query("UPDATE PESSOA SET NOME = '$post_nome', TELEFONE = '$post_telefone', SENHA = '$post_senha' WHERE ID = '$id'");            
         if(!$update){
-            $msg = "Erro ao gravar os dados no banco de dados: " . mysql_error();
+            $msg = "Erro ao gravar os dados no banco de dados ";
         }
         $msg = "Dados alterados com sucesso!<br><br>";
         

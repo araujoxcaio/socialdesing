@@ -1,3 +1,16 @@
+<?php  
+   
+    //ignorando "notices"
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+    
+    //verificando se já está logado, caso esteja, não permitirá visualizar esta página.
+    session_start();    
+    if(isset($_SESSION["email"])){
+        header("Location: index.php");
+        exit;        
+    }
+?>
+    
 <!DOCTYPE html>
 
     <html lang="en">

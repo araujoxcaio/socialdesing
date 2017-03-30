@@ -1,8 +1,8 @@
 <?php
+    //include da conexão com o banco de dados
     include("interface/conexao.php");
-    $connect = mysql_connect('localhost','root','');
-    $db = mysql_select_db('u619293682_sodes');
     
+    //ignorando "notices"
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
     
     $msg = '';
@@ -23,12 +23,12 @@
 
     if (isset($entrar)) {        
         //verificando se já existe o e-mail ou o CPF/CNPJ cadastrado no banco
-        $verifica = mysql_query("SELECT * FROM PESSOA WHERE CPF_CNPJ = '$cpf_cnpj'") or die("ERRO BD");
-        $verifica2 = mysql_query("SELECT * FROM PESSOA WHERE EMAIL = '$email'") or die("ERRO BD");
-        if (mysql_num_rows($verifica2)>0){
+        $verifica = $mysqli->query("SELECT * FROM PESSOA WHERE CPF_CNPJ = '$cpf_cnpj'");
+        $verifica2 = $mysqli->query("SELECT * FROM PESSOA WHERE EMAIL = '$email'");
+        if (mysqli_num_rows($verifica2)>0){
             $msg = 'Erro: Este e-mail já está cadastrado em nossa base de dados.';
         }        
-        elseif (mysql_num_rows($verifica)>0){
+        elseif (mysqli_num_rows($verifica)>0){
             $msg = 'Erro: Este CPF/CNPJ já está cadastrado em nossa base de dados.';
         }  
         
