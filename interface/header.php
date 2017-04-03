@@ -27,12 +27,19 @@
                             <div class="header-content-inner">        
                                 <center>
                                 <div class="container">
-                                <form class="navbar-form navbar">
-                                    <input type="text" class="form-control" placeholder="Pesquisar...">
+                                <form name="searchform" method="post" action="pesquisa.php" class="navbar-form navbar">
+                                    <input type="text" name="t_buscar" class="form-control" placeholder="Pesquisar...">
+                                    
+                                    <select class="form-control" name="c_buscar">
+                                        <option>Imagens</option>
+                                        <option>Produtos</option>
+                                        <option>Usuários</option>
+                                        <option>Vagas</option>
+                                    </select>
+                                    
+                                    <div style="display:none"><input type="submit" name="s_buscar" value=""></div>
                                 </form>
                                 </div>
-                                <a href="#" class="btn btn-outline btn-xl">Pesquisar</a>
-                                <a href="#" class="btn btn-outline btn-xl">Limpar</a>
                                 </center>
                             </div>
                         </div>

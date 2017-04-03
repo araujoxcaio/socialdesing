@@ -140,7 +140,7 @@
                         
                             <div class="form-group">
                                 <label>Categoria</label>
-                                <select name='categoria'>
+                                <select class="form-control" name='categoria'>
                                     <option value='Arte digital'>Arte digital</option>
                                     <option value='Arte tradicional'>Arte tradicional</option>
                                     <option value='Artesanato'>Artesanato</option>
