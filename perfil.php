@@ -120,7 +120,7 @@
                 <div class="col-md-12">
                 <center>
                 <div class="formcadastro">  
-                    <h1> Editar Perfil <?php echo $fisica_juridica ?></h1>
+                    <h1> Editar Perfil </h1>
 			<?php if($_SESSION['fisica_juridica'] == 'F'){
                             
                         echo "

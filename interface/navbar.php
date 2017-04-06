@@ -16,13 +16,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a class="page-scroll" href="sobre.php">Sobre</a>
+                            <a class="page-scroll" href="#sobre">Sobre</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="novidades.php">Novidades</a>
+                            <a class="page-scroll" href="#novidades">Novidades</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="contato.php">Contato</a>
+                            <a class="page-scroll" href="#contato">Contato</a>
                         </li>
                          
                         <?php if(isset($_SESSION['email'])){
@@ -39,7 +39,7 @@
                                         </div>
                                         
                                         <div class='form-group'>
-                                            <a href='inserir_imagem.php'><input type='submit' name='perfil' class='btn btn-outline btn-block' value='Meu Portfólio'></a>
+                                            <a href='gportfolio.php'><input type='submit' name='perfil' class='btn btn-outline btn-block' value='Meu Portfólio'></a>
                                         </div>
                                         
                                         <div class='form-group'>

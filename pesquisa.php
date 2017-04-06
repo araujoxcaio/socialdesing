@@ -70,7 +70,7 @@
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
                                         if ($verifica->num_rows<=0){
-                                            echo "<script language='javascript' type='text/javascript'>alert('Nenhum usuário encontrado. Por favor, tente novamente');window.location.href='../index.php';</script>";
+                                            echo "Nenhum usuário encontrado. Por favor, tente novamente.";
                                             die();
                                         }        
                                         //caso tenha encontrado os dados, prossegue...
@@ -100,7 +100,7 @@
                                                     echo "<td>".$telefone."</td>";                
                                                     echo "<td>".$email."</td>";                
                                                     echo "<td>".$data_cadastro."</td>";                
-                                                    echo "<td><a href='perfil.php?id=$id'>Ver Portfólio</a></td>";  
+                                                    echo "<td><a href='portfolio.php?id=$id'>Ver Portfólio</a></td>";  
                                                 echo "</tr>";
                                                 
                                             }
@@ -114,7 +114,7 @@
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
                                         if ($verifica->num_rows<=0){
-                                            echo "<script language='javascript' type='text/javascript'>alert('Nenhuma imagem encontrada. Por favor, tente novamente');window.location.href='index.php';</script>";
+                                            echo "Nenhuma imagem encontrada. Por favor, tente novamente.";
                                             die();
                                         }        
                                         //caso tenha encontrado os dados, prossegue...
@@ -130,7 +130,7 @@
                                                 
                                                 echo"
                                                 <div class='col-md-4'>
-                                                    <img src='uploads/min_$url' width='200px' height='200px'><br><br>                                                    
+                                                    <img src='uploads/min_$url' width='200px' height='150px'><br><br>                                                    
                                                     <a href='#' class='btn btn-outline btn-xl'>$nome</a><br><br>        
                                                 </div>";                                                
                                             }
