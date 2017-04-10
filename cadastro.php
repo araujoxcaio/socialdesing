@@ -44,7 +44,7 @@
                 $msg = 'Usuário cadastrado com sucesso! Por favor, efetue login.';
             }
             else{
-                $msg = 'Erro ao cadastrar o usuário';
+                $msg = 'Erro ao cadastrar o usuário: '. $mysqli->error;
             }
         }
     }

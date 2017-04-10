@@ -7,32 +7,33 @@
     
     $id = $_GET["id"]; 
     
-    $post_nome = $_POST['imagem_nome'];
-    $post_descricao = $_POST['imagem_descricao'];
-    $post_categoria = $_POST['imagem_categoria'];
-    $post_destaque = $_POST['imagem_destaque'];
+    $post_titulo = $_POST['vaga_titulo'];
+    $post_descricao = $_POST['vaga_descricao'];
+    $post_salario = $_POST['vaga_salario'];
+    $post_categoria = $_POST['vaga_categoria'];
+    $post_localizacao = $_POST['vaga_localizacao'];
     $post_editar = $_POST['editar'];
         
     //verificando se o botão salvar foi acionado
     if(isset($post_editar)){
         //update no banco de dados
-        $update = $mysqli->query("UPDATE IMAGEM SET NOME = '$post_nome', DESCRICAO = '$post_descricao', CATEGORIA = '$post_categoria', DESTAQUE = '$post_destaque'  WHERE ID = '$id'");            
-        $update2 = $mysqli->query("UPDATE IMAGEM SET DESTAQUE = '' WHERE ID <> '$id'");            
-        if(!$update && !$update2){
+        $update = $mysqli->query("UPDATE VAGA SET TITULO = '$post_titulo', DESCRICAO = '$post_descricao', SALARIO = '$post_salario', CATEGORIA = '$post_categoria', LOCALIZACAO = '$post_localizacao' WHERE ID = '$id'");
+        if(!$update){
             $msg = "Erro ao gravar os dados no banco de dados: ". $mysqli->error;
         }
-        $msg = "Imagem alterada com sucesso!<br><br>";
-    }   
-  
+        $msg = "Vaga alterada com sucesso!<br><br>";
+    }     
     
-    $imagem = $mysqli->query("SELECT * FROM IMAGEM WHERE ID = '$id'");
-    while ($row = $imagem->fetch_array(MYSQLI_ASSOC)){
-        $imagem_id = $row["ID"];
-        $imagem_nome = $row["NOME"];
-        $imagem_descricao = $row["DESCRICAO"];
-        $imagem_categoria = $row["CATEGORIA"];
-        $imagem_url = $row["URL"];
-        $data_upload = $row["DATA_UPLOAD"];
+    $vaga = $mysqli->query("SELECT * FROM VAGA WHERE ID = '$id'");
+    while ($row = $vaga->fetch_array(MYSQLI_ASSOC)){
+        $vaga_id = $row["ID"];
+        $vaga_titulo = $row["TITULO"];
+        $vaga_descricao = $row["DESCRICAO"];
+        $vaga_salario = $row["SALARIO"];
+        $vaga_categoria = $row["CATEGORIA"];
+        $vaga_localizacao = $row["LOCALIZACAO"];
+        $data_vaga = $row["DATA_VAGA"];  
+        $id_pessoa = $row["ID_PESSOA"];  
     }
         
 ?>
@@ -78,29 +79,34 @@
                         <div class="container">
                            <div class="apresentation"> 
                                     
-                            <div class="col-md-7">
+                            <div class="col-md-12">
                                 
                                 <?php echo "
                                 <center>
-                                    <h1>Editar imagem: $imagem_nome </h1> 
+                                    <h1>Editar vaga: $vaga_titulo </h1> 
                                 </center>
 
-                                <form action='editar_imagem.php?id=$id' method='POST'>	
+                                <form action='editar_vaga.php?id=$id' method='POST'>	
 
                                     <div class='form-group'>
-                                        <label for='Nome'>Nome</label>
-                                        <input type='text' class='form-control' name='imagem_nome' value='$imagem_nome' />
+                                        <label for='Titulo'>Título</label>
+                                        <input type='text' class='form-control' name='vaga_titulo' value='$vaga_titulo' />
                                     </div>
                                     
                                     <div class='form-group'>
                                         <label for='descricao'>Descrição</label>
-                                        <textarea class='form-control' name='produto_descricao' required >$imagem_descricao</textarea>
+                                        <textarea class='form-control' name='vaga_descricao' required >$vaga_descricao</textarea>
                                     </div> 
                                     
                                     <div class='form-group'>
+                                        <label for='salario'>Salário</label>
+                                        <input type='text' class='form-control' name='vaga_salario' value='$vaga_salario' />
+                                    </div>
+                                    
+                                    <div class='form-group'>
                                         <label for='Nome'>Categoria</label>
-                                        <select class='form-control' name='imagem_categoria'>
-                                            <option value='$imagem_categoria' selected>$imagem_categoria</option>
+                                        <select class='form-control' name='vaga_categoria'>
+                                            <option value='$vaga_categoria' selected>$vaga_categoria</option>
                                             <option value='Arte digital'>Arte digital</option>
                                             <option value='Arte tradicional'>Arte tradicional</option>
                                             <option value='Artesanato'>Artesanato</option>
@@ -117,16 +123,17 @@
                                             <option value='Revistas'>Revistas</option>
                                         </select>
                                     </div>
-                                    
-                                    <div class='form-group'>                                        
-                                        <label class='checkbox-inline'><input type='checkbox' name='imagem_destaque' /> Destaque <a style='text-decoration:none' title='Caso seja selecionada, essa será sua imagem de destaque no seu portfólio. A imagem destaque anterior será desconsiderada.'>?</a></label>
+
+                                    <div class='form-group'>
+                                        <label for='localizacao'>Localização</label>
+                                        <input type='text' class='form-control' name='vaga_localizacao' value='$vaga_localizacao' />
                                     </div>
                                     
                                     <input class='btn btn-success pull-left' type='submit' name='editar' value='Salvar Alterações' />
                                     
                                 </form> 
                                 
-                                    <a href='excluir_imagem.php?id=$id' class='btn btn-danger pull-right' onclick=\"return confirm('Tem certeza que deseja apagar a imagem? Esta ação não poderá ser desfeita.');\">Apagar Imagem</a>
+                                    <a href='excluir_vaga.php?id=$id' class='btn btn-danger pull-right' onclick=\"return confirm('Tem certeza que deseja apagar a imagem? Esta ação não poderá ser desfeita.');\">Apagar Vaga</a>
                                     
                                     <br><br>
                                     <center>$msg
@@ -137,21 +144,11 @@
                                 ";?>   
                                 
                             </div>
-       
-                            <div class="col-md-5">
-                                <?php echo " 
-                                <br><center><a href='uploads/$imagem_url''><img class='img-responsive' src='uploads/min_$imagem_url'></a>
-                                Enviada em: "; echo date('d/m/Y', strtotime($data_upload)); ?></center>                                
-                            </div>
+
       
                                 </div>
                         </div>   
                 
-                <div class="col-md-6">                
-                <div class="formcadastro">  
-                                    
-                </div>       
-                </div>
             </div>
         </div>
         </header>

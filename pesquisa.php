@@ -107,6 +107,77 @@
                                             echo "</table>";
                                         }
                                     }
+
+                                    //PESQUISAR VAGAS
+                                    if (isset($s_buscar) && $c_buscar == 'Vagas') {
+                                        $verifica = $mysqli->query("SELECT * FROM VAGA WHERE TITULO LIKE '%$t_buscar%' OR DESCRICAO LIKE '%$t_buscar%'");
+
+                                        //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
+                                        if ($verifica->num_rows<=0){
+                                            echo "Nenhuma vaga encontrada. Por favor, tente novamente.";
+                                            die();
+                                        }        
+                                        //caso tenha encontrado os dados, prossegue...
+                                        else{
+                                            echo"<h1>Resultados da pesquisa de vagas para: $t_buscar</h1><br><br>
+                                            <table> 
+                                            <tr><center>
+                                                <th><center>Título</center></th>                                    
+                                                <th><center>Salario</center></th>
+                                                <th><center>Categoria</center></th>
+                                                <th><center>Localizacao</center></th>
+                                                <th><center>Data de publicação</center></th>
+                                            </center></tr>"; 
+                                            while ($row = $verifica->fetch_array(MYSQLI_ASSOC)){
+                                                $vaga_id = $row["ID"];
+                                                $vaga_titulo = $row["TITULO"];
+                                                $vaga_descricao = $row["DESCRICAO"];
+                                                $vaga_salario = $row["SALARIO"];
+                                                $vaga_categoria = $row["CATEGORIA"];
+                                                $vaga_localizacao = $row["LOCALIZACAO"];
+                                                $data_vaga = $row["DATA_VAGA"];  
+                                                $id_pessoa = $row["ID_PESSOA"];
+
+                                                echo "<tr>               
+                                                    <td>$vaga_titulo</td>
+                                                    <td>$vaga_salario</td>
+                                                    <td>$vaga_categoria</td>
+                                                    <td>$vaga_localizacao</td>
+                                                    <td>"; echo date('d/m/Y', strtotime($data_vaga)); echo "</td>
+                                                    <td><a href='vaga.php?id=$vaga_id'>Ver Detalhes</a></td>";                                                
+                                            }
+                                            echo "</table>";
+                                        }
+                                    }
+
+                                    //PESQUISAR PRODUTOS
+                                    if (isset($s_buscar) && $c_buscar == 'Produtos') {
+                                        $verifica = $mysqli->query("SELECT * FROM PRODUTO WHERE NOME LIKE '%$t_buscar%' OR DESCRICAO LIKE '%$t_buscar%'");
+
+                                        //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
+                                        if ($verifica->num_rows<=0){
+                                            echo "Nenhum produto encontrado. Por favor, tente novamente.";
+                                            die();
+                                        }        
+                                        //caso tenha encontrado os dados, prossegue...
+                                        else{
+                                            echo "<h1>Resultados da pesquisa de produtos para: $t_buscar</h1><br><br>";
+                                            while ($row = $verifica->fetch_array(MYSQLI_ASSOC)){
+                                                $id = $row["ID"];
+                                                $nome = $row["NOME"];
+                                                $descricao = $row["DESCRICAO"];
+                                                $categoria = $row["CATEGORIA"];
+                                                $imagem_vinculada_url = $row["URL_IMAGEM"];
+                                                $email = $row["DATA_UPLOAD"];
+                                                
+                                                echo"
+                                                <div class='col-md-4'>
+                                                    <img src='uploads/min_$imagem_vinculada_url' width='200px' height='150px'><br><br>                                                    
+                                                    <a href='#' class='btn btn-outline btn-xl'>$nome</a><br><br>        
+                                                </div>";                                                
+                                            }
+                                        }
+                                    }                                         
                                     
                                     //PESQUISAR IMAGENS
                                     if (isset($s_buscar) && $c_buscar == 'Imagens') {

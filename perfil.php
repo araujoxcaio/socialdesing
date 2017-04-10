@@ -19,6 +19,7 @@
     $senha = $_SESSION['senha'];
     $id = $_SESSION['id'];
     $nome = $_SESSION['nome'];
+    $sobre = $_SESSION['sobre'];
     $cpf_cnpj = $_SESSION['cpf_cnpj'];
     $fisica_juridica = $_SESSION['fisica_juridica'];
     $telefone = $_SESSION['telefone'];
@@ -29,6 +30,7 @@
         $post_cpf = $_POST['cpf'];  
         $post_email = $_POST['f_email'];
         $post_nome = $_POST['f_nome'];
+        $post_sobre = $_POST['f_sobre'];
         $post_senha = md5($_POST['f_senha']);  
         $post_telefone = $_POST['f_telefone'];  
         $post_salvar = $_POST['f_submit'];
@@ -37,6 +39,7 @@
         $post_cpf = $_POST['cnpj'];  
         $post_email = $_POST['j_email'];
         $post_nome = $_POST['j_nome'];
+        $post_sobre = $_POST['j_sobre'];
         $post_senha = md5($_POST['j_senha']);  
         $post_telefone = $_POST['j_telefone'];  
         $post_salvar = $_POST['j_submit'];
@@ -45,7 +48,7 @@
     //verificando se o botão salvar foi acionado
     if(isset($post_salvar)){
         //update no banco de dados
-        $update = $mysqli->query("UPDATE PESSOA SET NOME = '$post_nome', TELEFONE = '$post_telefone', SENHA = '$post_senha' WHERE ID = '$id'");            
+        $update = $mysqli->query("UPDATE PESSOA SET NOME = '$post_nome', TELEFONE = '$post_telefone', SENHA = '$post_senha', SOBRE = '$post_sobre' WHERE ID = '$id'");            
         if(!$update){
             $msg = "Erro ao gravar os dados no banco de dados ";
         }
@@ -55,13 +58,16 @@
         if($fisica_juridica == 'F'){
             $_SESSION['nome'] = $_POST['f_nome'];
             $_SESSION['telefone'] = $_POST['f_telefone'];            
+            $_SESSION['sobre'] = $_POST['f_sobre'];            
         }        
         if($fisica_juridica == 'J'){
             $_SESSION['nome'] = $_POST['j_nome'];
             $_SESSION['telefone'] = $_POST['j_telefone'];  
+            $_SESSION['sobre'] = $_POST['j_sobre'];  
         }        
         $nome = $_SESSION['nome'];
         $telefone = $_SESSION['telefone'];
+        $sobre = $_SESSION['sobre'];
         
     }
 	
@@ -149,7 +155,12 @@
                                 <div class='form-group'>
                                         <label for='telefone'>Telefone</label>
                                         <input type='text' class='form-control' name='f_telefone' OnKeyPress=\"formatar('## ####-#####', this)\" value='$telefone' maxlength='13' />
-                                </div><br>									
+                                </div>
+                                
+                                <div class='form-group'>
+                                        <label for='sobre'>Sobre</label>
+                                        <textarea class='form-control' name='f_sobre' />$sobre</textarea>
+                                </div><br>	
                                 
                                 $msg
 
@@ -187,7 +198,12 @@
                                 <div class='form-group'>
                                         <label for='telefone'>Telefone</label>
                                         <input type='text' class='form-control' name='j_telefone' OnKeyPress=\"formatar('## ####-#####', this)\" value='$telefone' maxlength='13' />
-                                </div><br>									
+                                </div>	
+                                
+                                <div class='form-group'>
+                                        <label for='sobre'>Sobre</label>
+                                        <textarea class='form-control' name='j_sobre' value='$sobre' /></textarea>
+                                </div><br>
                                 
                                 $msg
 

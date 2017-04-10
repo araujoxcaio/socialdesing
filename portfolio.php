@@ -11,6 +11,7 @@
     while ($row = $pessoa->fetch_array(MYSQLI_ASSOC)){
         $pessoa_id = $row["ID"];
         $pessoa_nome = $row["NOME"];
+        $sobre = $row["SOBRE"];
         $cpf_cnpj = $row["CPF_CNPJ"];
         $fisica_juridica = $row["FISICA_JURIDICA"];
         $telefone = $row["TELEFONE"];
@@ -66,26 +67,35 @@
                                 <?php echo "<h3> CPF/CNPJ: ". $cpf_cnpj. "</h3>" ?> 
                                 <?php echo "<h3> E-mail: ". $email. "</h3>" ?> 
                                 <?php echo "<h3> Telefone: ". $telefone. "</h3>" ?>
-                                <?php echo "<h3> Sobre: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu scelerisque elit, tempus dignissim ante. Cras lacus libero, scelerisque in massa quis, convallis ullamcorper sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla in nunc volutpat eget dictum id, elementum ac metus. ".$id. "</h3>" ?> <br>
+                                <?php echo "<h3> Sobre: ". $sobre. "</h3>" ?> <br>
                                 <a href="#" class="btn btn-outline btn-xl">Ver produtos</a>
                                 <a href="#" class="btn btn-outline btn-xl pull-right">Ver imagens</a>
                                      
                             </div>
        
                             <div class="col-md-4">
-                                    <br><a href="#"><img class="img-responsive" src="http://placehold.it/400x400" alt=""></a>
                                     <br>
-                                    <center><a href="#" class="btn btn-outline btn-xl">Produto em destaque</a><br></center>
+                    <?php
+                    $imagem_destaque = $mysqli->query("SELECT * FROM IMAGEM WHERE ID_PESSOA = '$id' AND DESTAQUE = 'on'");
+                    while ($row = $imagem_destaque->fetch_array(MYSQLI_ASSOC)){
+                        $d_imagem_id = $row["ID"];
+                        $d_imagem_nome = $row["NOME"];
+                        $d_imagem_descricao = $row["DESCRICAO"];
+                        $d_imagem_categoria = $row["CATEGORIA"];
+                        $d_imagem_url = $row["URL"];
+                        $d_data_upload = $row["DATA_UPLOAD"];                    
+                    }
+                    echo "<center><a href='#'><img class='img-responsive' src='uploads/$d_imagem_url' width='400' alt='$d_imagem_nome'></a></center>";
+                    ?>                
+                                    <br>
+                                    <center>Imagem em destaque<br></center>
+                                    
+                                    
                             </div>
       
                                 </div>
                         </div>   
-                
-                <div class="col-md-6">                
-                <div class="formcadastro">  
-                                    
-                </div>       
-                </div>
+
             </div>
         </div>
         </header>
@@ -123,6 +133,54 @@
                         </a>
                         <h3>
                             <center><a href='#'>$imagem_nome</a></center>
+                        </h3>
+                        </div>";
+                    }
+                    
+                    
+                
+                ?>               
+
+            </div>
+                
+            </div>
+    </section>
+        
+        
+    <section id="features" class="features" style="background:#eee">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="section-heading">
+                            <h2>Produtos</h2>
+                            <p class="text-muted">Estes são os produtos enviados pelo autor</p>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="container">
+        <!-- Projects Row -->
+            <div class="row">
+                <?php 
+                
+                    $produto = $mysqli->query("SELECT * FROM PRODUTO WHERE ID_PESSOA = '$pessoa_id'");
+                    while ($row = $produto->fetch_array(MYSQLI_ASSOC)){
+                        $produto_id = $row["ID"];
+                        $produto_nome = $row["NOME"];
+                        $produto_descricao = $row["DESCRICAO"];
+                        $produto_categoria = $row["CATEGORIA"];
+                        $imagem_vinculada_url = $row["URL_IMAGEM"];
+                        $produto_url = $row["URL_PRODUTO"];
+                        $data_upload = $row["DATA_UPLOAD"];
+                        
+                        echo 
+                        "<div class='col-md-4 portfolio-item'>
+                        <a href='#'>
+                            <img src='uploads/min_$imagem_vinculada_url' width='350px' height='230px'>
+                        </a>
+                        <h3>
+                            <center><a href='#'>$produto_nome</a></center>
                         </h3>
                         </div>";
                     }

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 27-Mar-2017 às 15:01
+-- Generation Time: 10-Abr-2017 às 03:02
 -- Versão do servidor: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- PHP Version: 7.0.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -33,6 +33,7 @@ CREATE TABLE `imagem` (
   `CATEGORIA` varchar(50) NOT NULL,
   `URL` varchar(50) NOT NULL,
   `DATA_UPLOAD` date NOT NULL,
+  `DESTAQUE` varchar(2) NOT NULL,
   `ID_PESSOA` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -45,6 +46,7 @@ CREATE TABLE `imagem` (
 CREATE TABLE `pessoa` (
   `ID` int(10) NOT NULL,
   `NOME` varchar(100) NOT NULL,
+  `SOBRE` varchar(300) NOT NULL,
   `CPF_CNPJ` varchar(18) NOT NULL,
   `FISICA_JURIDICA` varchar(1) NOT NULL,
   `TELEFONE` varchar(15) NOT NULL,
@@ -57,8 +59,8 @@ CREATE TABLE `pessoa` (
 -- Extraindo dados da tabela `pessoa`
 --
 
-INSERT INTO `pessoa` (`ID`, `NOME`, `CPF_CNPJ`, `FISICA_JURIDICA`, `TELEFONE`, `EMAIL`, `SENHA`, `DATA_CADASTRO`) VALUES
-(1, 'Administrador', '000.000.000-00', 'F', '(00) 00000-0000', 'admin@admin.com', 'e10adc3949ba59abbe56e057f20f883e', '2017-03-26');
+INSERT INTO `pessoa` (`ID`, `NOME`, `SOBRE`, `CPF_CNPJ`, `FISICA_JURIDICA`, `TELEFONE`, `EMAIL`, `SENHA`, `DATA_CADASTRO`) VALUES
+(1, 'Administrador', 'rem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel ligula viverra dolor sollicitudin semper. Morbi varius mauris a hendrerit viverra. Aliquam eleifend mi elit, et tempus enim feugiat nec. Vivamus at facilisis mauris. Sed vestibulum nibh et lectus pharetra, eu viverra ipsum imperdie', '000.000.000-00', 'J', '(00) 00000-0000', 'admin@admin.com', 'e10adc3949ba59abbe56e057f20f883e', '2017-03-26'),
 
 -- --------------------------------------------------------
 
@@ -77,6 +79,7 @@ CREATE TABLE `produto` (
   `ID_PESSOA` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 -- --------------------------------------------------------
 
 --
@@ -85,8 +88,8 @@ CREATE TABLE `produto` (
 
 CREATE TABLE `vaga` (
   `ID` int(10) NOT NULL,
-  `NOME` varchar(50) NOT NULL,
-  `DESCRICAO` varchar(150) NOT NULL,
+  `TITULO` varchar(50) NOT NULL,
+  `DESCRICAO` varchar(300) NOT NULL,
   `SALARIO` double DEFAULT NULL,
   `CATEGORIA` varchar(50) NOT NULL,
   `LOCALIZACAO` varchar(100) DEFAULT NULL,
@@ -133,22 +136,22 @@ ALTER TABLE `vaga`
 -- AUTO_INCREMENT for table `imagem`
 --
 ALTER TABLE `imagem`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `vaga`
 --
 ALTER TABLE `vaga`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
