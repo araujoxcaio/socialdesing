@@ -20,7 +20,7 @@
 	$arquivo = isset($_FILES["foto"]) ? $_FILES["foto"] : FALSE;
 
 	// Tamanho máximo do arquivo (em bytes)
-	$config["tamanho"] = 5000000;        
+	$config["tamanho"] = 1024 * 1024 * 5;        
 
         $erro = "0";
 	// Formulário postado... executa as ações
@@ -35,7 +35,7 @@
 	    else
 	    {
 	        // Pega extensão do arquivo
-	        preg_match("/\.(bmp|png|jpg|jpeg){1}$/i", $arquivo["name"], $ext);
+	        preg_match("/\.(bmp|png|gif|jpg|jpeg){1}$/i", $arquivo["name"], $ext);
 
 	        // Gera um nome único para a imagem
 	        $imagem_nome = md5(uniqid(time())) . "." . $ext[1];
@@ -45,7 +45,7 @@
 
 	        // Faz o upload da imagem
 	        move_uploaded_file($arquivo["tmp_name"], $imagem_dir);
-			$sql_code = "INSERT INTO IMAGEM (NOME, DESCRICAO, CATEGORIA, URL, DATA_UPLOAD, ID_PESSOA) VALUES ('$nome', '$descricao', '$categoria', '$imagem_nome', NOW(), '$id')";
+			$sql_code = "INSERT INTO imagem (NOME, DESCRICAO, CATEGORIA, URL, DATA_UPLOAD, ID_PESSOA) VALUES ('$nome', '$descricao', '$categoria', '$imagem_nome', NOW(), '$id')";
 			if($mysqli->query($sql_code)){
 				$msg = "Arquivo enviado com sucesso!";
 			}
@@ -140,9 +140,10 @@
                                 <label>Selecione a imagem</label>
                                 <input type="file" class="form-control"  name="foto" required />
                             </div>
-							Todos os campos são obrigatórios!<br><br>
+                            Atenção: Todos os campos são obrigatórios! <br>
+                            A imagem deve ser nas extensões jpg, jpeg, gif, png e conter no máximo 5MB.<br><br>
                             <input class="btn btn-primary" type="submit" name="enviar" value="Enviar" />
-                            <a href="index.php" class="btn btn-info">Voltar</a><br>		
+                            <a href="gportfolio.php" class="btn btn-info">Voltar</a><br>		
                     </form>                    
                 </div>
 				<?php if($erro != "0") echo "<p>$erro</p>"; else echo "<p>$msg</p>"; ?>

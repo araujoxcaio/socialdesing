@@ -1,4 +1,4 @@
-    <section id="download" class="download bg-primary text-center">
+    <section id="sobre" class="download bg-primary text-center">
             <div class="container">
                 <div class="row">
                     <div class="container">

@@ -5,23 +5,26 @@
     //ignorando "notices"
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
     
+    //pegando o ID do get que foi passado pela URL
     $id = $_GET["id"];  
     
-    $vaga = $mysqli->query("SELECT * FROM vaga WHERE ID = '$id'");
-    while ($row = $vaga->fetch_array(MYSQLI_ASSOC)){
-        $vaga_id = $row["ID"];
-        $vaga_titulo = $row["TITULO"];
-        $vaga_descricao = $row["DESCRICAO"];
-        $vaga_salario = $row["SALARIO"];
-        $vaga_categoria = $row["CATEGORIA"];
-        $vaga_localizacao = $row["LOCALIZACAO"];
-        $data_vaga = $row["DATA_VAGA"];  
-        $id_pessoa = $row["ID_PESSOA"];  
-    }
+    //jogando os valores da tabela imagem em variaveis
+    $imagem = $mysqli->query("SELECT * FROM imagem WHERE ID = '$id'");
+    while ($row = $imagem->fetch_array(MYSQLI_ASSOC)){
+        $imagem_id = $row["ID"];
+        $imagem_nome = $row["NOME"];
+        $imagem_descricao = $row["DESCRICAO"];
+        $imagem_categoria = $row["CATEGORIA"];
+        $imagem_destaque = $row["DESTAQUE"];
+        $imagem_url = $row["URL"];
+        $data_upload = $row["DATA_UPLOAD"];
+        $id_pessoa = $row["ID_PESSOA"];
+    }    
     
     $pessoa = $mysqli->query("SELECT * FROM pessoa WHERE ID = '$id_pessoa'");
     while ($row = $pessoa->fetch_array(MYSQLI_ASSOC)){
         $pessoa_nome = $row["NOME"];
+        $pessoa_id = $row["ID"];
     }    
         
 ?>
@@ -67,34 +70,30 @@
                         <div class="container">
                            <div class="apresentation"> 
                                     
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 
                                 <?php echo "
                                     
                                 <center>
-                                    <h1>Vaga: $vaga_titulo </h1> <br>
+                                    <h1>$imagem_nome </h1> <br>
                                 </center>
                                 
-                                <h4><b>Descrição:</b> $vaga_descricao</h4>
-                                <h4><b>Salário:</b> $vaga_salario</h4>
-                                <h4><b>Categoria:</b> $vaga_categoria</h4>
-                                <h4><b>Localização:</b> $vaga_localizacao</h4>
-                                <h4><b>Empresa:</b> $pessoa_nome</h4>
-                                <h4><b>Data de publicação: </b>"; echo date('d/m/Y', strtotime($data_vaga)); echo "</h4><br><br>                              
+                                <h4><b>Descrição:</b> $imagem_descricao</h4>
+                                <h4><b>Categoria:</b> $imagem_categoria</h4>                           
+                                <h4><b>Enviada por:</b> $pessoa_nome <a href='portfolio.php?id=$id_pessoa'>(ver perfil)</a></h4> 
+                                <h4><b>Enviada em:</b> "; echo date('d/m/Y', strtotime($data_upload)); echo "</h4>
                                 
                                 ";?>  
                                 
-                                <?php
-                                    //verificando se a pessoa é física, para poder se cadastrar
-                                    if($_SESSION["fisica_juridica"] == 'F'){
-                                        $idatual = $_SESSION['id'];
-                                        echo "
-                                            <center><a title='Ao clicar no botão, o Social Design irá enviar um e-mail com seus dados de perfil para a empresa que publicou esta vaga.' href='mail.php?id=$idatual' class='btn btn-success'>Candidatar-se a vaga</a></center>
-                                        ";
-                                    }
-                                ?>
-                                
                             </div>
+                               
+                            <div class="col-md-6">
+                                
+                                <?php echo " 
+                                <center><br><a href='uploads/$imagem_url''><img class='img-responsive' src='uploads/min_$imagem_url'></a>
+                                    </center> 
+                                ";?>
+                            </div>                               
        
             </div>
         </div>

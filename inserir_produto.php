@@ -21,8 +21,8 @@
 	$produto = isset($_FILES["produto"]) ? $_FILES["produto"] : FALSE;
 
 	// Tamanho máximo do arquivo (em bytes)
-	$configi["tamanho"] = 5000000;        
-	$configp["tamanho"] = 100000000;        
+	$configi["tamanho"] = 1024 * 1024 * 5;        
+	$configp["tamanho"] = 1024 * 1024 * 100;        
 
         $erro = "0";
 	// Formulário postado... executa as ações
@@ -61,11 +61,11 @@
 	if ($produto) {            
 
             // Faz a verificação da extensão do arquivo
-            $_UP['extensoes'] = array('rar', 'zip', 'gif');
+            $_UP['extensoes'] = array('rar', 'zip', 'blend','fbx','3ds','obj');
             
             $extensao = strtolower(end(explode('.', $produto['name'])));
             if (array_search($extensao, $_UP['extensoes']) === false) {
-                $erro = "Arquivo inválido! O produto deve ser nas extensões zip, rar e conter no máximo 100MB.";
+                $erro = "Arquivo inválido! O produto deve ser nas extensões zip, rar, blend, fbx, 3ds, obj e conter no máximo 100MB.";
             }    
 
 	    // Verificação de dados OK, nenhum erro ocorrido, executa então o upload...
@@ -82,7 +82,7 @@
 
 	        // Faz o upload da imagem
 	        move_uploaded_file($produto["tmp_name"], $produto_dir);
-			$sql_code = "INSERT INTO PRODUTO (NOME, DESCRICAO, CATEGORIA, URL_IMAGEM, URL_ARQUIVO, DATA_UPLOAD, ID_PESSOA) VALUES ('$nome', '$descricao', '$categoria', '$imagem_nome', '$produto_nome', NOW(), '$id')";
+			$sql_code = "INSERT INTO produto (NOME, DESCRICAO, CATEGORIA, URL_IMAGEM, URL_ARQUIVO, DATA_UPLOAD, ID_PESSOA) VALUES ('$nome', '$descricao', '$categoria', '$imagem_nome', '$produto_nome', NOW(), '$id')";
 			if($mysqli->query($sql_code)){
 				$msg = "Arquivo enviado com sucesso!";
 			}
@@ -176,7 +176,8 @@
                                     <input type="file" class="form-control"  name="produto" required />
                             </div>
                             
-                            Todos os campos são obrigatórios!<br><br>
+                            Atenção: Todos os campos são obrigatórios!<br>
+                            O produto deve ser nas extensões zip, rar, blend, fbx, 3ds, obj e conter no máximo 100MB.<br><br>
                             <input class="btn btn-primary" type="submit" name="enviar" value="Enviar" />
                             <a href="index.php" class="btn btn-info">Voltar</a><br>		
                     </form>                    

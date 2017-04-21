@@ -5,8 +5,37 @@
     //ignorando "notices"
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
     
-    $id = $_GET["id"]; 
+    //iniciando a sessão
+    session_start();
     
+    //pegando o ID do get que foi passado pela URL
+    $id = $_GET["id"];
+    
+    //jogando os valores da tabela produto em variaveis
+    $produto = $mysqli->query("SELECT * FROM produto WHERE ID = '$id'");
+    while ($row = $produto->fetch_array(MYSQLI_ASSOC)){
+        $produto_id = $row["ID"];
+        $produto_nome = $row["NOME"];
+        $produto_descricao = $row["DESCRICAO"];
+        $produto_categoria = $row["CATEGORIA"];
+        $imagem_vinculada_url = $row["URL_IMAGEM"];
+        $produto_url = $row["URL_ARQUIVO"];
+        $data_upload = $row["DATA_UPLOAD"];
+        $id_pessoa = $row["ID_PESSOA"];
+    }
+    
+    //verificando se está logado
+    if(!isset($_SESSION["email"])){
+        header("Location: login.php");
+        exit;        
+    }
+    else{
+        //verificando se a pessoa que está logada é a mesma que publicou a imagem
+        if($_SESSION["id"] != $id_pessoa){
+            echo"<script language='javascript' type='text/javascript'>alert('Este produto não pertence ao seu usuário. Você só pode editar os seus produtos!');window.location.href='gportfolio.php';</script>";
+        }
+    }       
+       
     $post_nome = $_POST['produto_nome'];
     $post_descricao = $_POST['produto_descricao'];
     $post_categoria = $_POST['produto_categoria'];
@@ -16,25 +45,17 @@
     //verificando se o botão salvar foi acionado
     if(isset($post_editar)){
         //update no banco de dados
-        $update = $mysqli->query("UPDATE PRODUTO SET NOME = '$post_nome', DESCRICAO = '$post_descricao', CATEGORIA = '$post_categoria'  WHERE ID = '$id'");                        
+        $update = $mysqli->query("UPDATE produto SET NOME = '$post_nome', DESCRICAO = '$post_descricao', CATEGORIA = '$post_categoria'  WHERE ID = '$id'");                        
         if(!$update && !$update2){
             $msg = "Erro ao gravar os dados no banco de dados: ". $mysqli->error;
         }
         $msg = "Produto alteradaocom sucesso!<br><br>";
+        $produto_nome = $post_nome;
+        $produto_descricao = $post_descricao;
+        $produto_categoria = $post_categoria; 
     }   
-  
-    
-    $produto = $mysqli->query("SELECT * FROM PRODUTO WHERE ID = '$id'");
-    while ($row = $produto->fetch_array(MYSQLI_ASSOC)){
-        $produto_id = $row["ID"];
-        $produto_nome = $row["NOME"];
-        $produto_descricao = $row["DESCRICAO"];
-        $produto_categoria = $row["CATEGORIA"];
-        $imagem_vinculada_url = $row["URL_IMAGEM"];
-        $produto_url = $row["URL_ARQUIVO"];
-        $data_upload = $row["DATA_UPLOAD"];
-    }
-        
+           
+ 
 ?>
 
 <!DOCTYPE html>
@@ -89,12 +110,12 @@
 
                                     <div class='form-group'>
                                         <label for='Nome'>Nome</label>
-                                        <input type='text' class='form-control' name='produto_nome' value='$produto_nome' />
+                                        <input type='text' class='form-control' name='produto_nome' value='$produto_nome' required />
                                     </div>
                                     
                                     <div class='form-group'>
                                         <label for='descricao'>Descrição</label>
-                                        <textarea class='form-control' name='produto_descricao' required >$produto_descricao</textarea>
+                                        <textarea class='form-control' name='produto_descricao'>$produto_descricao</textarea>
                                     </div> 
                                     
                                     <div class='form-group'>
@@ -137,7 +158,7 @@
                             <div class="col-md-5">
                                 <?php echo " 
                                 <br><center><a href='uploads/$imagem_vinculada_url'><img class='img-responsive' src='uploads/min_$imagem_vinculada_url'></a>
-                                Enviada em: "; echo date('d/m/Y', strtotime($data_upload)); ?><br><br>                               
+                                Enviado em: "; echo date('d/m/Y', strtotime($data_upload)); ?><br><br>                               
                                 Link do Produto: <?php echo "<a href='uploads/$produto_url'>$produto_url</a>" ?></center><br><br>                               
                             </div>
       

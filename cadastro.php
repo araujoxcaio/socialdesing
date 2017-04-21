@@ -23,8 +23,8 @@
 
     if (isset($entrar)) {        
         //verificando se já existe o e-mail ou o CPF/CNPJ cadastrado no banco
-        $verifica = $mysqli->query("SELECT * FROM PESSOA WHERE CPF_CNPJ = '$cpf_cnpj'");
-        $verifica2 = $mysqli->query("SELECT * FROM PESSOA WHERE EMAIL = '$email'");
+        $verifica = $mysqli->query("SELECT * FROM pessoa WHERE CPF_CNPJ = '$cpf_cnpj'");
+        $verifica2 = $mysqli->query("SELECT * FROM pessoa WHERE EMAIL = '$email'");
         if (mysqli_num_rows($verifica2)>0){
             $msg = 'Erro: Este e-mail já está cadastrado em nossa base de dados.';
         }        

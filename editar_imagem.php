@@ -5,7 +5,41 @@
     //ignorando "notices"
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
     
-    $id = $_GET["id"]; 
+    //iniciando a sessão
+    session_start();
+    
+    //pegando o ID do get que foi passado pela URL
+    $id = $_GET["id"];
+    
+    //jogando os valores da tabela imagem em variaveis
+    $imagem = $mysqli->query("SELECT * FROM imagem WHERE ID = '$id'");
+    while ($row = $imagem->fetch_array(MYSQLI_ASSOC)){
+        $imagem_id = $row["ID"];
+        $imagem_nome = $row["NOME"];
+        $imagem_descricao = $row["DESCRICAO"];
+        $imagem_categoria = $row["CATEGORIA"];
+        $imagem_destaque = $row["DESTAQUE"];
+        $imagem_url = $row["URL"];
+        $data_upload = $row["DATA_UPLOAD"];
+        $id_pessoa = $row["ID_PESSOA"];
+    }        
+    
+    if($imagem_destaque == "on"){
+            $checkbox = 'checked';
+    }
+    
+    //verificando se está logado
+    if(!isset($_SESSION["email"])){
+        header("Location: login.php");
+        exit;        
+    }
+    else{
+        //verificando se a pessoa que está logada é a mesma que publicou a imagem
+        if($_SESSION["id"] != $id_pessoa){
+            echo"<script language='javascript' type='text/javascript'>alert('Esta imagem não pertence ao seu usuário. Você só pode editar suas imagens!');window.location.href='gportfolio.php';</script>";
+        }
+    }   
+     
     
     $post_nome = $_POST['imagem_nome'];
     $post_descricao = $_POST['imagem_descricao'];
@@ -16,25 +50,25 @@
     //verificando se o botão salvar foi acionado
     if(isset($post_editar)){
         //update no banco de dados
-        $update = $mysqli->query("UPDATE IMAGEM SET NOME = '$post_nome', DESCRICAO = '$post_descricao', CATEGORIA = '$post_categoria', DESTAQUE = '$post_destaque'  WHERE ID = '$id'");            
-        $update2 = $mysqli->query("UPDATE IMAGEM SET DESTAQUE = '' WHERE ID <> '$id'");            
+        $update = $mysqli->query("UPDATE imagem SET NOME = '$post_nome', DESCRICAO = '$post_descricao', CATEGORIA = '$post_categoria', DESTAQUE = '$post_destaque'  WHERE ID = '$id'");            
+        $update2 = $mysqli->query("UPDATE imagem SET DESTAQUE = '' WHERE ID <> '$id' and ID_PESSOA='$id_pessoa'");            
         if(!$update && !$update2){
             $msg = "Erro ao gravar os dados no banco de dados: ". $mysqli->error;
         }
         $msg = "Imagem alterada com sucesso!<br><br>";
+        $imagem_nome = $post_nome;
+        $imagem_descricao = $post_descricao;
+        $imagem_categoria = $post_categoria;
+        $imagem_destaque = $post_destaque;
+        
+        if($imagem_destaque == "on"){
+                $checkbox = 'checked';
+        }        
+
     }   
   
     
-    $imagem = $mysqli->query("SELECT * FROM IMAGEM WHERE ID = '$id'");
-    while ($row = $imagem->fetch_array(MYSQLI_ASSOC)){
-        $imagem_id = $row["ID"];
-        $imagem_nome = $row["NOME"];
-        $imagem_descricao = $row["DESCRICAO"];
-        $imagem_categoria = $row["CATEGORIA"];
-        $imagem_url = $row["URL"];
-        $data_upload = $row["DATA_UPLOAD"];
-    }
-        
+
 ?>
 
 <!DOCTYPE html>
@@ -89,12 +123,12 @@
 
                                     <div class='form-group'>
                                         <label for='Nome'>Nome</label>
-                                        <input type='text' class='form-control' name='imagem_nome' value='$imagem_nome' />
+                                        <input type='text' class='form-control' name='imagem_nome' value='$imagem_nome' required />
                                     </div>
                                     
                                     <div class='form-group'>
                                         <label for='descricao'>Descrição</label>
-                                        <textarea class='form-control' name='produto_descricao' required >$imagem_descricao</textarea>
+                                        <textarea class='form-control' name='imagem_descricao'>$imagem_descricao</textarea>
                                     </div> 
                                     
                                     <div class='form-group'>
@@ -119,7 +153,7 @@
                                     </div>
                                     
                                     <div class='form-group'>                                        
-                                        <label class='checkbox-inline'><input type='checkbox' name='imagem_destaque' /> Destaque <a style='text-decoration:none' title='Caso seja selecionada, essa será sua imagem de destaque no seu portfólio. A imagem destaque anterior será desconsiderada.'>?</a></label>
+                                        <label class='checkbox-inline'><input type='checkbox' name='imagem_destaque' $checkbox /> Destaque <a style='text-decoration:none' title='Caso seja selecionada, essa será sua imagem de destaque no seu portfólio. A imagem destaque anterior será desconsiderada.'>?</a></label>
                                     </div>
                                     
                                     <input class='btn btn-success pull-left' type='submit' name='editar' value='Salvar Alterações' />

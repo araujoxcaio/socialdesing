@@ -12,7 +12,7 @@
     
     //verificando se foi clicado no botão entrar
     if (isset($entrar)) {
-        $verifica = $mysqli->query("SELECT * FROM PESSOA WHERE EMAIL = '$email' AND SENHA = '$password'");
+        $verifica = $mysqli->query("SELECT * FROM pessoa WHERE EMAIL = '$email' AND SENHA = '$password'");
         
         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
         if (mysqli_num_rows($verifica)<=0){
@@ -26,7 +26,7 @@
             $_SESSION['senha'] = $password;
 			
             //pegando os outros dados e jogando na sessão
-            $result = $mysqli->query("SELECT ID, NOME, CPF_CNPJ, FISICA_JURIDICA, TELEFONE, DATA_CADASTRO FROM PESSOA WHERE EMAIL = '$email' AND SENHA = '$password'");
+            $result = $mysqli->query("SELECT ID, NOME, CPF_CNPJ, FISICA_JURIDICA, TELEFONE, DATA_CADASTRO FROM pessoa WHERE EMAIL = '$email' AND SENHA = '$password'");
             while ($row = $result->fetch_array(MYSQLI_ASSOC)){
                 $id = $row["ID"];
                 $nome = $row["NOME"];

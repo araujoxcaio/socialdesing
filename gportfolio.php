@@ -83,7 +83,7 @@
                                 
                                 <?php 
 
-                                $imagem = $mysqli->query("SELECT * FROM IMAGEM WHERE ID_PESSOA = '$pessoa_id'");
+                                $imagem = $mysqli->query("SELECT * FROM imagem WHERE ID_PESSOA = '$pessoa_id'");
                                 while ($row = $imagem->fetch_array(MYSQLI_ASSOC)){
                                     $imagem_id = $row["ID"];
                                     $imagem_nome = $row["NOME"];
@@ -111,7 +111,7 @@
                                 
                                 <?php 
 
-                                $produto = $mysqli->query("SELECT * FROM PRODUTO WHERE ID_PESSOA = '$pessoa_id'");
+                                $produto = $mysqli->query("SELECT * FROM produto WHERE ID_PESSOA = '$pessoa_id'");
                                 while ($row = $produto->fetch_array(MYSQLI_ASSOC)){
                                     $produto_id = $row["ID"];
                                     $produto_nome = $row["NOME"];
@@ -136,7 +136,10 @@
                             </div><br>
                             
                             <div class="col-md-12" style="border-top: 1px solid #fff">
-                                <h2 align='center'> Vagas publicadas </h2><br>
+                                
+                            <?php if($_SESSION["fisica_juridica"] == 'J'){ 
+                                
+                               echo" <h2 align='center'> Vagas publicadas </h2><br>
                                 
                                 <table> 
                                     <tr><center>
@@ -145,10 +148,9 @@
                                         <th><center>Categoria</center></th>
                                         <th><center>Localizacao</center></th>
                                         <th><center>Data de publicação</center></th>
-                                        </center></tr>
-                            <?php if($_SESSION["fisica_juridica"] == 'J'){ 
+                                        </center></tr>";
                                 
-                            $vaga = $mysqli->query("SELECT * FROM VAGA WHERE ID_PESSOA = '$pessoa_id'");
+                            $vaga = $mysqli->query("SELECT * FROM vaga WHERE ID_PESSOA = '$pessoa_id'");
                                 while ($row = $vaga->fetch_array(MYSQLI_ASSOC)){
                                     $vaga_id = $row["ID"];
                                     $vaga_titulo = $row["TITULO"];

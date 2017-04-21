@@ -5,7 +5,36 @@
     //ignorando "notices"
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
     
-    $id = $_GET["id"]; 
+    //iniciando a sessão
+    session_start();
+    
+    //pegando o ID do get que foi passado pela URL
+    $id = $_GET["id"];
+    
+    //jogando os valores da tabela vaga em variaveis
+    $vaga = $mysqli->query("SELECT * FROM vaga WHERE ID = '$id'");
+    while ($row = $vaga->fetch_array(MYSQLI_ASSOC)){
+        $vaga_id = $row["ID"];
+        $vaga_titulo = $row["TITULO"];
+        $vaga_descricao = $row["DESCRICAO"];
+        $vaga_salario = $row["SALARIO"];
+        $vaga_categoria = $row["CATEGORIA"];
+        $vaga_localizacao = $row["LOCALIZACAO"];
+        $data_vaga = $row["DATA_VAGA"];  
+        $id_pessoa = $row["ID_PESSOA"];  
+    }
+    
+    //verificando se está logado
+    if(!isset($_SESSION["email"])){
+        header("Location: login.php");
+        exit;        
+    }
+    else{
+        //verificando se a pessoa que está logada é a mesma que publicou a imagem
+        if($_SESSION["id"] != $id_pessoa){
+            echo"<script language='javascript' type='text/javascript'>alert('Esta vaga não pertence ao seu usuário. Você só pode editar as suas vagas!');window.location.href='gportfolio.php';</script>";
+        }
+    }         
     
     $post_titulo = $_POST['vaga_titulo'];
     $post_descricao = $_POST['vaga_descricao'];
@@ -17,24 +46,20 @@
     //verificando se o botão salvar foi acionado
     if(isset($post_editar)){
         //update no banco de dados
-        $update = $mysqli->query("UPDATE VAGA SET TITULO = '$post_titulo', DESCRICAO = '$post_descricao', SALARIO = '$post_salario', CATEGORIA = '$post_categoria', LOCALIZACAO = '$post_localizacao' WHERE ID = '$id'");
+        $update = $mysqli->query("UPDATE vaga SET TITULO = '$post_titulo', DESCRICAO = '$post_descricao', SALARIO = '$post_salario', CATEGORIA = '$post_categoria', LOCALIZACAO = '$post_localizacao' WHERE ID = '$id'");
         if(!$update){
             $msg = "Erro ao gravar os dados no banco de dados: ". $mysqli->error;
         }
         $msg = "Vaga alterada com sucesso!<br><br>";
+        
+        $vaga_titulo = $post_titulo;
+        $vaga_descricao = $post_descricao;
+        $vaga_salario = $post_salario; 
+        $vaga_categoria = $post_categoria; 
+        $vaga_localizacao = $post_localizacao; 
     }     
     
-    $vaga = $mysqli->query("SELECT * FROM VAGA WHERE ID = '$id'");
-    while ($row = $vaga->fetch_array(MYSQLI_ASSOC)){
-        $vaga_id = $row["ID"];
-        $vaga_titulo = $row["TITULO"];
-        $vaga_descricao = $row["DESCRICAO"];
-        $vaga_salario = $row["SALARIO"];
-        $vaga_categoria = $row["CATEGORIA"];
-        $vaga_localizacao = $row["LOCALIZACAO"];
-        $data_vaga = $row["DATA_VAGA"];  
-        $id_pessoa = $row["ID_PESSOA"];  
-    }
+
         
 ?>
 
@@ -90,12 +115,12 @@
 
                                     <div class='form-group'>
                                         <label for='Titulo'>Título</label>
-                                        <input type='text' class='form-control' name='vaga_titulo' value='$vaga_titulo' />
+                                        <input type='text' class='form-control' name='vaga_titulo' value='$vaga_titulo' required/>
                                     </div>
                                     
                                     <div class='form-group'>
                                         <label for='descricao'>Descrição</label>
-                                        <textarea class='form-control' name='vaga_descricao' required >$vaga_descricao</textarea>
+                                        <textarea class='form-control' name='vaga_descricao' required>$vaga_descricao</textarea>
                                     </div> 
                                     
                                     <div class='form-group'>

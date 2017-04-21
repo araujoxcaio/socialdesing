@@ -25,7 +25,7 @@
     $id_pessoa = $_SESSION['id'];
        
     if (isset($_POST['enviar'])) {          
-        $sql = "INSERT INTO VAGA (TITULO, DESCRICAO, SALARIO, CATEGORIA, LOCALIZACAO, DATA_VAGA, ID_PESSOA) VALUES ('$titulo', '$descricao', '$salario', '$categoria', '$localizacao', NOW(), '$id_pessoa')";
+        $sql = "INSERT INTO vaga (TITULO, DESCRICAO, SALARIO, CATEGORIA, LOCALIZACAO, DATA_VAGA, ID_PESSOA) VALUES ('$titulo', '$descricao', '$salario', '$categoria', '$localizacao', NOW(), '$id_pessoa')";
         if($mysqli->query($sql)){
             $msg = 'Vaga inserida com sucesso! Verifique suas vagas cadastradas no seu portfólio.';
         }
@@ -84,7 +84,7 @@
                         
                             <div class="form-group">
                                 <label for="descricao">Descrição</label>
-                                <textarea class='form-control' name='descricao' required ></textarea>
+                                <textarea class='form-control' name='descricao'></textarea>
                             </div>
                         
                             <div class="form-group">

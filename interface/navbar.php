@@ -16,13 +16,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a class="page-scroll" href="#sobre">Sobre</a>
+                            <a class="page-scroll" href="index.php#sobre">Sobre</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#novidades">Novidades</a>
+                            <a class="page-scroll" href="index.php#novidades">Novidades</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#contato">Contato</a>
+                            <a class="page-scroll" href="index.php#contato">Contato</a>
                         </li>
                          
                         <?php if(isset($_SESSION['email'])){
@@ -32,8 +32,14 @@
                             <ul id='login-dp' class='dropdown-menu'>
                             <li>   
                                 <div id='formrow' class='row'>
-                                    <div class='formlogin'><br>
-                                    
+                                    <div class='formlogin'><br>";
+                            
+                                    if($_SESSION['id'] == '1'){
+                                    echo"
+                                        <div class='form-group'>
+                                            <a href='admin.php'><input type='submit' name='perfil' class='btn btn-outline btn-block' value='Administração'></a>
+                                        </div>";
+                                    } echo"
                                         <div class='form-group'>
                                             <a href='perfil.php'><input type='submit' name='perfil' class='btn btn-outline btn-block' value='Editar Perfil'></a>
                                         </div>

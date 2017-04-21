@@ -7,7 +7,7 @@
     
     $id = $_GET["id"];    
     
-    $pessoa = $mysqli->query("SELECT * FROM PESSOA WHERE ID = '$id'");
+    $pessoa = $mysqli->query("SELECT * FROM pessoa WHERE ID = '$id'");
     while ($row = $pessoa->fetch_array(MYSQLI_ASSOC)){
         $pessoa_id = $row["ID"];
         $pessoa_nome = $row["NOME"];
@@ -68,15 +68,15 @@
                                 <?php echo "<h3> E-mail: ". $email. "</h3>" ?> 
                                 <?php echo "<h3> Telefone: ". $telefone. "</h3>" ?>
                                 <?php echo "<h3> Sobre: ". $sobre. "</h3>" ?> <br>
-                                <a href="#" class="btn btn-outline btn-xl">Ver produtos</a>
-                                <a href="#" class="btn btn-outline btn-xl pull-right">Ver imagens</a>
+                                <a href="#produtos" class="btn btn-outline btn-xl">Ver produtos</a>
+                                <a href="#imagens" class="btn btn-outline btn-xl pull-right">Ver imagens</a>
                                      
                             </div>
        
                             <div class="col-md-4">
                                     <br>
                     <?php
-                    $imagem_destaque = $mysqli->query("SELECT * FROM IMAGEM WHERE ID_PESSOA = '$id' AND DESTAQUE = 'on'");
+                    $imagem_destaque = $mysqli->query("SELECT * FROM imagem WHERE ID_PESSOA = '$id' AND DESTAQUE = 'on'");
                     while ($row = $imagem_destaque->fetch_array(MYSQLI_ASSOC)){
                         $d_imagem_id = $row["ID"];
                         $d_imagem_nome = $row["NOME"];
@@ -100,7 +100,7 @@
         </div>
         </header>
         
-            <section id="features" class="features">
+            <section id="imagens" class="features">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -117,7 +117,7 @@
             <div class="row">
                 <?php 
                 
-                    $imagem = $mysqli->query("SELECT * FROM IMAGEM WHERE ID_PESSOA = '$id'");
+                    $imagem = $mysqli->query("SELECT * FROM imagem WHERE ID_PESSOA = '$id'");
                     while ($row = $imagem->fetch_array(MYSQLI_ASSOC)){
                         $imagem_id = $row["ID"];
                         $imagem_nome = $row["NOME"];
@@ -128,11 +128,11 @@
                         
                         echo 
                         "<div class='col-md-4 portfolio-item'>
-                        <a href='#'>
+                        <a href='imagem.php?id=$imagem_id'>
                             <img src='uploads/min_$imagem_url' width='350px' height='230px'>
                         </a>
                         <h3>
-                            <center><a href='#'>$imagem_nome</a></center>
+                            <center><a href='imagem.php?id=$imagem_id'>$imagem_nome</a></center>
                         </h3>
                         </div>";
                     }
@@ -147,7 +147,7 @@
     </section>
         
         
-    <section id="features" class="features" style="background:#eee">
+    <section id="produtos" class="features" style="background:#eee">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -164,7 +164,7 @@
             <div class="row">
                 <?php 
                 
-                    $produto = $mysqli->query("SELECT * FROM PRODUTO WHERE ID_PESSOA = '$pessoa_id'");
+                    $produto = $mysqli->query("SELECT * FROM produto WHERE ID_PESSOA = '$pessoa_id'");
                     while ($row = $produto->fetch_array(MYSQLI_ASSOC)){
                         $produto_id = $row["ID"];
                         $produto_nome = $row["NOME"];
@@ -176,11 +176,11 @@
                         
                         echo 
                         "<div class='col-md-4 portfolio-item'>
-                        <a href='#'>
+                        <a href='produto.php?id=$produto_id'>
                             <img src='uploads/min_$imagem_vinculada_url' width='350px' height='230px'>
                         </a>
                         <h3>
-                            <center><a href='#'>$produto_nome</a></center>
+                            <center><a href='produto.php?id=$produto_id'>$produto_nome</a></center>
                         </h3>
                         </div>";
                     }

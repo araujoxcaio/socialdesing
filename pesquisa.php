@@ -66,7 +66,7 @@
 
                                     //PESQUISAR USUÁRIOS
                                     if (isset($s_buscar) && $c_buscar == 'Usuários') {
-                                        $verifica = $mysqli->query("SELECT * FROM PESSOA WHERE NOME LIKE '%$t_buscar%'");
+                                        $verifica = $mysqli->query("SELECT * FROM pessoa WHERE NOME LIKE '%$t_buscar%'");
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
                                         if ($verifica->num_rows<=0){
@@ -99,7 +99,7 @@
                                                     echo "<td>".$cpf_cnpj."</td>";                
                                                     echo "<td>".$telefone."</td>";                
                                                     echo "<td>".$email."</td>";                
-                                                    echo "<td>".$data_cadastro."</td>";                
+                                                    echo "<td>".date('d/m/Y', strtotime($data_cadastro))."</td>";                
                                                     echo "<td><a href='portfolio.php?id=$id'>Ver Portfólio</a></td>";  
                                                 echo "</tr>";
                                                 
@@ -110,7 +110,7 @@
 
                                     //PESQUISAR VAGAS
                                     if (isset($s_buscar) && $c_buscar == 'Vagas') {
-                                        $verifica = $mysqli->query("SELECT * FROM VAGA WHERE TITULO LIKE '%$t_buscar%' OR DESCRICAO LIKE '%$t_buscar%'");
+                                        $verifica = $mysqli->query("SELECT * FROM vaga WHERE TITULO LIKE '%$t_buscar%' OR DESCRICAO LIKE '%$t_buscar%'");
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
                                         if ($verifica->num_rows<=0){
@@ -152,7 +152,7 @@
 
                                     //PESQUISAR PRODUTOS
                                     if (isset($s_buscar) && $c_buscar == 'Produtos') {
-                                        $verifica = $mysqli->query("SELECT * FROM PRODUTO WHERE NOME LIKE '%$t_buscar%' OR DESCRICAO LIKE '%$t_buscar%'");
+                                        $verifica = $mysqli->query("SELECT * FROM produto WHERE NOME LIKE '%$t_buscar%' OR DESCRICAO LIKE '%$t_buscar%'");
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
                                         if ($verifica->num_rows<=0){
@@ -173,7 +173,7 @@
                                                 echo"
                                                 <div class='col-md-4'>
                                                     <img src='uploads/min_$imagem_vinculada_url' width='200px' height='150px'><br><br>                                                    
-                                                    <a href='#' class='btn btn-outline btn-xl'>$nome</a><br><br>        
+                                                    <a href='produto.php?id=$id' class='btn btn-outline btn-xl'>$nome</a><br><br>        
                                                 </div>";                                                
                                             }
                                         }
@@ -181,7 +181,7 @@
                                     
                                     //PESQUISAR IMAGENS
                                     if (isset($s_buscar) && $c_buscar == 'Imagens') {
-                                        $verifica = $mysqli->query("SELECT * FROM IMAGEM WHERE NOME LIKE '%$t_buscar%' or DESCRICAO LIKE '%$t_buscar%'");
+                                        $verifica = $mysqli->query("SELECT * FROM imagem WHERE NOME LIKE '%$t_buscar%' or DESCRICAO LIKE '%$t_buscar%'");
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
                                         if ($verifica->num_rows<=0){
@@ -202,7 +202,7 @@
                                                 echo"
                                                 <div class='col-md-4'>
                                                     <img src='uploads/min_$url' width='200px' height='150px'><br><br>                                                    
-                                                    <a href='#' class='btn btn-outline btn-xl'>$nome</a><br><br>        
+                                                    <a href='imagem.php?id=$id' class='btn btn-outline btn-xl'>$nome</a><br><br>        
                                                 </div>";                                                
                                             }
                                         }

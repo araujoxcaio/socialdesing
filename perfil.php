@@ -48,7 +48,7 @@
     //verificando se o botão salvar foi acionado
     if(isset($post_salvar)){
         //update no banco de dados
-        $update = $mysqli->query("UPDATE PESSOA SET NOME = '$post_nome', TELEFONE = '$post_telefone', SENHA = '$post_senha', SOBRE = '$post_sobre' WHERE ID = '$id'");            
+        $update = $mysqli->query("UPDATE pessoa SET NOME = '$post_nome', TELEFONE = '$post_telefone', SENHA = '$post_senha', SOBRE = '$post_sobre' WHERE ID = '$id'");            
         if(!$update){
             $msg = "Erro ao gravar os dados no banco de dados ";
         }
@@ -202,10 +202,12 @@
                                 
                                 <div class='form-group'>
                                         <label for='sobre'>Sobre</label>
-                                        <textarea class='form-control' name='j_sobre' value='$sobre' /></textarea>
-                                </div><br>
+                                        <textarea class='form-control' name='j_sobre' />$sobre</textarea>
+                                </div>
                                 
-                                $msg
+                                Caso queira alterar seu CNPJ ou seu e-mail, <a href='index.php#contato'>entre em contato conosco</a>.
+                                <br><br>$msg
+                                    
 
                                 <input class='btn btn-primary' type='submit' name='j_submit' value='Salvar Alterações' />
 
