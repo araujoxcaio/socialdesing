@@ -63,7 +63,7 @@
                             <ul id='login-dp' class='dropdown-menu'>
                             <li>   
                                 <div id='formrow' class='row'>
-                                    <form class='formlogin' name='login' action='http://localhost/SocialDesign/interface/efetuarlogin.php' method='POST' accept-charset='UTF-8'><!-- ALTERAR O LINK-->
+                                    <form class='formlogin' name='login' action='/interface/efetuarlogin.php' method='POST' accept-charset='UTF-8'><!-- ALTERAR O LINK-->
                                         <div class='form-group'>
                                             <label class='sr-only'>E-mail</label>
                                             <input type='text' name='email' class='form-control' id='email' placeholder='e-mail' required>
