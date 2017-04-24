@@ -60,7 +60,7 @@ CREATE TABLE `pessoa` (
 --
 
 INSERT INTO `pessoa` (`ID`, `NOME`, `SOBRE`, `CPF_CNPJ`, `FISICA_JURIDICA`, `TELEFONE`, `EMAIL`, `SENHA`, `DATA_CADASTRO`) VALUES
-(1, 'Administrador', 'rem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel ligula viverra dolor sollicitudin semper. Morbi varius mauris a hendrerit viverra. Aliquam eleifend mi elit, et tempus enim feugiat nec. Vivamus at facilisis mauris. Sed vestibulum nibh et lectus pharetra, eu viverra ipsum imperdie', '000.000.000-00', 'J', '(00) 00000-0000', 'admin@admin.com', 'e10adc3949ba59abbe56e057f20f883e', '2017-03-26'),
+(1, 'Administrador', 'rem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel ligula viverra dolor sollicitudin semper. Morbi varius mauris a hendrerit viverra. Aliquam eleifend mi elit, et tempus enim feugiat nec. Vivamus at facilisis mauris. Sed vestibulum nibh et lectus pharetra, eu viverra ipsum imperdie', '000.000.000-00', 'J', '(00) 00000-0000', 'admin@admin.com', 'e10adc3949ba59abbe56e057f20f883e', '2017-03-26');
 
 -- --------------------------------------------------------
 

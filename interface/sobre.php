@@ -7,44 +7,43 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Social Design
-                    <small>portfólio artistico gratuito</small>
+                    - Comunidade Artística
                 </h1>
             </div>
-            <p> Social Design tem como objetivo abrir possibilidades para os artistas, cadistas e designs
+            <p> Social Design tem como objetivo abrir possibilidades para os artistas, cadistas e designers
                 a divulgarem suas criações artísticas, formando assim um portfólio e permitindo a comercialização
                 de suas criações.</p>
         </div>
         <!-- /.row -->
-
         <!-- Projects Row -->
         <div class="row">
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="img/icone001.png" alt="">
                 </a>
                 <p>Portfólio</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Crie seu portfólio artístico online agora mesmo!</p>
             </div>
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="img/icone004.png" alt="">
                 </a>
                 <p>Social</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Pesquise portfólios alheios e tenha referências boas para seu desenvolvimento.</p>
             </div>
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="img/icone002.png" alt="">
                 </a>
                 <p>Comércio</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Compra & venda de assets.</p>
             </div>
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="img/icone003.png" alt="">
                 </a>
                 <p>Emprego</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Empresas procuram os melhores artistas e usam a rede para ofertar vagas.</p>
             </div>
         </div>
                 </div>

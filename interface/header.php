@@ -3,24 +3,17 @@
                     <div class="row">
                         <div class="header-content">
                         <div class="container">
-                            <center><div class="apresentation"> 
-                                    
+                            <div class="apresentation">
                             <div class="col-md-4">
-                                    <br><a href="login.php"><img class="img-responsive" src="http://placehold.it/200x200" alt=""></a>
-                                    <br>
-                                    <a href="login.php" class="btn btn-outline btn-xl">Login</a><br>        
+                                <br><a href="login.php"><img class="img-responsive" src="" alt=""></a>
+                                    <a href="login.php" class="btn btn-outline btn-xl"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a><br>        
+
+                                <br><a href="cadastro.php"><img class="img-responsive" src="" alt=""></a>
+                                    <a href="cadastro.php" class="btn btn-outline btn-xl"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Cadastro</a><br>
                             </div>
-       
-                            <div class="col-md-4">
-                                    <br><a href="cadastro.php"><img class="img-responsive" src="http://placehold.it/200x200" alt=""></a>
-                                    <br>
-                                    <a href="cadastro.php" class="btn btn-outline btn-xl">Cadastro</a><br>
-                            </div>
-                            <div class="col-md-4">
-                                    <br><a href="cadastro.php"><img class="img-responsive" src="http://placehold.it/200x200" alt=""></a>
-                                    <br>
-                                    <a href="cadastro.php" class="btn btn-outline btn-xl">Cadastro</a><br>
-                            </div>        
+                            <div class="col-md-8">        
+                                    <br> <?php include 'carousel.php';?>
+                            </div>       
                                 </div></center>
                         </div>    
  
@@ -47,5 +40,4 @@
                         </div>
                         </div>
                     </div>
-            </div>
     </header>

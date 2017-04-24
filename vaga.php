@@ -4,6 +4,14 @@
     
     //ignorando "notices"
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+
+    session_start();
+    
+    //verificando se está logado
+    if(!isset($_SESSION["email"])){
+        header("Location: login.php");
+        exit;        
+    }
     
     $id = $_GET["id"];  
     
@@ -22,7 +30,23 @@
     $pessoa = $mysqli->query("SELECT * FROM pessoa WHERE ID = '$id_pessoa'");
     while ($row = $pessoa->fetch_array(MYSQLI_ASSOC)){
         $pessoa_nome = $row["NOME"];
-    }    
+        $pessoa_email = $row["EMAIL"];
+    }
+
+	$mensagem = "Olá, ".$pessoa_nome."!\n
+	Este é um e-mail automático da Social Design.\n
+	O usuário ".$_SESSION['nome']." mostrou interesse pela vaga ".$vaga_titulo." divulgada em nosso site.\n
+	Caso tenha interesse em conhecer o portfólio deste usuário, para visualizar seus dados pessoais e seus projetos disponibilizados em nosso site, acesse pelo link a seguir:\n
+	https://socialdesign.000webhostapp.com/portfolio.php?id=".$_SESSION['id']."\n
+Atenciosamente,
+Equipe Social Design\n\n";
+    $headers = "From: fsocialdesign@gmail.com\n";
+    $headers .= "X-Sender:  <fsocialdesign@gmail.com>\n"; //email do servidor //que enviou
+    $headers .= "X-Mailer: PHP  v".phpversion()."\n";
+    $headers .= "X-IP:  ".$_SERVER['REMOTE_ADDR']."\n";
+    $headers .= "MIME-Version: 1.0\n";
+
+    //mail($para, $pessoa_nome, $pessoa_email, $mensagem, $headers);  //função que faz o envio do email.
         
 ?>
 
@@ -56,6 +80,13 @@
         <!-- Theme CSS -->
         <link href="css/socialdesign.css" rel="stylesheet">
 
+        <script>
+		function msg()
+		{
+		alert("Sua candidatura foi enviada com sucesso. Aguarde a empresa entrar em contato. Boa sorte!");
+		}
+		</script>
+
     </head>
 
     <body id="page-top">
@@ -80,6 +111,7 @@
                                 <h4><b>Categoria:</b> $vaga_categoria</h4>
                                 <h4><b>Localização:</b> $vaga_localizacao</h4>
                                 <h4><b>Empresa:</b> $pessoa_nome</h4>
+                                <h4><b>Email:</b> $pessoa_email</h4>  
                                 <h4><b>Data de publicação: </b>"; echo date('d/m/Y', strtotime($data_vaga)); echo "</h4><br><br>                              
                                 
                                 ";?>  
@@ -88,9 +120,8 @@
                                     //verificando se a pessoa é física, para poder se cadastrar
                                     if($_SESSION["fisica_juridica"] == 'F'){
                                         $idatual = $_SESSION['id'];
-                                        echo "
-                                            <center><a title='Ao clicar no botão, o Social Design irá enviar um e-mail com seus dados de perfil para a empresa que publicou esta vaga.' href='mail.php?id=$idatual' class='btn btn-success'>Candidatar-se a vaga</a></center>
-                                        ";
+                                        echo "<center><input type='button' onclick='msg()' class='btn btn-success' value='Candidatar-se a vaga'</center>", 
+                                        mail($pessoa_email, "[SOCIAL DESIGN] Vaga de emprego - ".$vaga_titulo, $mensagem, $headers);
                                     }
                                 ?>
                                 
