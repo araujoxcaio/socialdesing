@@ -1,12 +1,28 @@
-    <section id="contato" class="download text-center" style="background: #ccc;">
-            <div class="container">
-                <div class="row">
+<?php
+
+if(isset($_POST['enviar'])){
+	
+	$mensagem = "(Mensagem enviada por ".$_POST['nome']." em ".date('d.m.y')." através do formulário de contato do site): \n \n".$_POST['mensagem']."\n";
+    $headers = "From: ".$_POST['email']."\n";
+    $headers .= "X-Sender: <".$_POST['email'].">\n";
+    $headers .= "X-Mailer: PHP  v".phpversion()."\n";
+    $headers .= "X-IP:  ".$_SERVER['REMOTE_ADDR']."\n";
+    $headers .= "MIME-Version: 1.0\n";
+	
+	mail('fsocialdesign@gmail.com', "[SOCIAL DESIGN] Formulário de contato - ".$_POST['assunto'], $mensagem, $headers);
+	
+	echo"<script language='javascript' type='text/javascript'>alert('Mensagem enviada com sucesso! Aguarde que em breve retornaremos');window.location.href='../index.php';</script>";
+}
+
+?>
+	
+	<section id="contato" class="download text-center" style="background: #ccc;">
                     <div class="container">
 
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Entre em contato</h1>
+                <h1 class="page-header">Entre em contato conosco</h1>
             </div>
             <p> Utilize o formulário abaixo para se comunicar conosco:</p>
         </div>
@@ -17,7 +33,7 @@
                 <div class="col-md-12">
                 <center>
                 <div class="formcadastro">  
-                    <form action="contato.php" method="POST" enctype="multipart/form-data">                        
+                    <form action="/interface/contato.php" method="POST" enctype="multipart/form-data">                        
                             <div class="form-group">
                                 <label for="nome">Seu nome</label>
                                 <input type="text" class="form-control" name="nome" required />
@@ -25,26 +41,16 @@
                         
                             <div class="form-group">
                                 <label for="descricao">Seu e-mail</label>
-                                <input type="text" class="form-control" name="descricao" value="" required />
+                                <input type="text" class="form-control" name="email" value="" required />
                             </div>  
                         
                             <div class="form-group">
                                 <label>Assunto</label>
-                                <select class="form-control" name='categoria'>
-                                    <option value='Arte digital'>Arte digital</option>
-                                    <option value='Arte tradicional'>Arte tradicional</option>
-                                    <option value='Artesanato'>Artesanato</option>
-                                    <option value='Cartoons & Comics'>Cartoons & Comics</option>
-                                    <option value='Concursos'>Concursos</option>
-                                    <option value='Desenhos e Interfaces'>Desenhos e Interfaces</option>
-                                    <option value='Filmes e Animações'>Filmes e Animações</option>
-                                    <option value='Fotografia'>Fotografia</option>
-                                    <option value='Literatura'>Literatura</option>
-                                    <option value='Livros de movimento'>Livros de movimento</option>
-                                    <option value='Manga e Anime'>Manga e Anime</option>
-                                    <option value='Personalização'>Personalização</option>
-                                    <option value='Projetos Comunitários'>Projetos Comunitários</option>
-                                    <option value='Revistas'>Revistas</option>
+                                <select class="form-control" name='assunto'>
+									<option value='selecione' selected disabled>(Selecione um assunto)</option>
+                                    <option value='Alteração de cadastro'>Alteração de cadastro</option>
+                                    <option value='Dúvidas'>Dúvidas</option>
+                                    <option value='Sugestões / Reclamações'>Sugestões / Reclamações</option>
                                 </select>
 
                             </div>
@@ -62,5 +68,4 @@
                 </div>
             </div>
                 </div>
-            </div>
     </section>
