@@ -15,7 +15,7 @@
         $cpf_cnpj = $row["CPF_CNPJ"];
         $fisica_juridica = $row["FISICA_JURIDICA"];
         $telefone = $row["TELEFONE"];
-        $email = $row["EMAIL"];
+        $email_pessoa = $row["EMAIL"];
         $data_cadastro = $row["DATA_CADASTRO"];
     }
 	
@@ -65,7 +65,7 @@
                             <div class="col-md-8">
                                 <center><?php echo "<h1>Portfólio: ". $pessoa_nome. "</h1>" ?></center>
                                 <?php echo "<h3> CPF/CNPJ: ". $cpf_cnpj. "</h3>" ?> 
-                                <?php echo "<h3> E-mail: ". $email. "</h3>" ?> 
+                                <?php echo "<h3> E-mail: ". $email_pessoa. "</h3>" ?> 
                                 <?php echo "<h3> Telefone: ". $telefone. "</h3>" ?>
                                 <?php echo "<h3> Sobre: ". $sobre. "</h3>" ?> <br>
                                 <a href="#produtos" class="btn btn-outline btn-xl">Ver produtos</a>
@@ -85,7 +85,7 @@
                         $d_imagem_url = $row["URL"];
                         $d_data_upload = $row["DATA_UPLOAD"];                    
                     }
-                    echo "<center><a href='#'><img class='img-responsive' src='uploads/$d_imagem_url' width='400' alt='$d_imagem_nome'></a></center>";
+                    echo "<center><a href='imagem.php?id=$d_imagem_id'><img class='img-responsive' src='uploads/$d_imagem_url' width='400' alt='$d_imagem_nome'></a></center>";
                     ?>                
                                     <br>
                                     <center>Imagem em destaque<br></center>
