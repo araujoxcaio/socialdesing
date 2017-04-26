@@ -16,11 +16,11 @@
           </div>
         </div>
         <div class="item">
-          <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+          <img class="second-slide" src="img/socialdesign001.png" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
               <p>Saiba mais sobre a comunidade:</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Curtir!</a></p>
+              <p><a class="btn btn-lg btn-primary" href="https://www.facebook.com/fsocialdesign/" role="button">Curtir!</a></p>
             </div>
           </div>
         </div>

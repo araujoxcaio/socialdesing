@@ -18,30 +18,30 @@
         <!-- Projects Row -->
         <div class="row">
             <div class="col-md-3 portfolio-item">
-                <a href="#">
+                
                     <img class="img-responsive" src="img/icone001.png" alt="">
-                </a>
+                
                 <p>Portfólio</p>
                 <p>Crie seu portfólio artístico online agora mesmo!</p>
             </div>
             <div class="col-md-3 portfolio-item">
-                <a href="#">
+                
                     <img class="img-responsive" src="img/icone004.png" alt="">
-                </a>
+                
                 <p>Social</p>
                 <p>Pesquise portfólios alheios e tenha referências boas para seu desenvolvimento.</p>
             </div>
             <div class="col-md-3 portfolio-item">
-                <a href="#">
+                
                     <img class="img-responsive" src="img/icone002.png" alt="">
-                </a>
+               
                 <p>Comércio</p>
                 <p>Compra & venda de assets.</p>
             </div>
             <div class="col-md-3 portfolio-item">
-                <a href="#">
+                
                     <img class="img-responsive" src="img/icone003.png" alt="">
-                </a>
+                
                 <p>Emprego</p>
                 <p>Empresas procuram os melhores artistas e usam a rede para ofertar vagas.</p>
             </div>
