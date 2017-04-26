@@ -26,13 +26,14 @@
             $_SESSION['senha'] = $password;
 			
             //pegando os outros dados e jogando na sessão
-            $result = $mysqli->query("SELECT ID, NOME, CPF_CNPJ, FISICA_JURIDICA, TELEFONE, DATA_CADASTRO FROM pessoa WHERE EMAIL = '$email' AND SENHA = '$password'");
+            $result = $mysqli->query("SELECT ID, NOME, CPF_CNPJ, FISICA_JURIDICA, TELEFONE, DATA_CADASTRO, SOBRE FROM pessoa WHERE EMAIL = '$email' AND SENHA = '$password'");
             while ($row = $result->fetch_array(MYSQLI_ASSOC)){
                 $id = $row["ID"];
                 $nome = $row["NOME"];
                 $cpf_cnpj = $row["CPF_CNPJ"];
                 $fisica_juridica = $row["FISICA_JURIDICA"];
                 $telefone = $row["TELEFONE"];
+				$sobre = $row["SOBRE"];
                 $data_cadastro = $row["DATA_CADASTRO"];
             }
 			
@@ -41,28 +42,16 @@
             $_SESSION['cpf_cnpj'] = $cpf_cnpj;
             $_SESSION['fisica_juridica'] = $fisica_juridica;
             $_SESSION['telefone'] = $telefone;
-            $_SESSION['data_cadastro'] = $data_cadastro;		
+            $_SESSION['data_cadastro'] = $data_cadastro;
+            $_SESSION['sobre'] = $sobre;
 			
-            header("Location:../index.php");
+            if($_SESSION['nome'] == ''){
+                echo"<script language='javascript' type='text/javascript'>alert('Por favor, complete seu perfil.');window.location.href='../perfil.php';</script>";
+            }
+            else{
+                header("Location:../index.php");
+            }
+            
           }
       }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
