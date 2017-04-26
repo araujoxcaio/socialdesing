@@ -17,7 +17,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a class="page-scroll" href="#sobre index.php">Sobre</a>
+                            <a class="page-scroll" href="index.php#sobre ">Sobre</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="index.php#novidades">Novidades</a>
