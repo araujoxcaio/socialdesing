@@ -22,15 +22,15 @@
                                 <div class="container">
                                     
                                     <div class="input-group">
-                                    <form name="searchform" method="post" action="pesquisa.php" class="navbar-form navbar">
-                                        <input type="text" name="t_buscar" class="form-control" placeholder="Pesquisar..." required >                                        
-                                        <select class="form-control" name="c_buscar">
+                                    <form name="searchform" method="get" action="pesquisa.php" class="navbar-form navbar">
+                                        <input type="text" name="q" class="form-control" placeholder="Pesquisar..." required >                                        
+                                        <select class="form-control" name="tipo">
                                             <option>Imagens</option>
                                             <option>Produtos</option>
                                             <option>Usuários</option>
                                             <option>Vagas</option>
                                         </select>
-                                        <span class="input-group-btn"><input type="submit" class="btn btn-default" name="s_buscar" value="ok"></span>
+                                        <span class="input-group-btn"><input type="submit" class="btn btn-default" value="ok"></span>
                                     </form>
                                     </div>                                                     
                                 
