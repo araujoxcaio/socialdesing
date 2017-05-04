@@ -60,22 +60,40 @@
 
                                     error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 
-                                    $t_buscar = $_POST['t_buscar'];
-                                    $s_buscar = $_POST['s_buscar'];     
-                                    $c_buscar = $_POST['c_buscar'];     
+                                    $q = $_GET['q'];    
+                                    $tipo = $_GET['tipo'];
+
+									$busca = $_GET["busca"];
+									
+									//paginação
+									$total_reg = "3";
+									
+									$pagina=$_GET['pagina'];
+									if (!$pagina) {
+										$pc = "1";
+									} 
+									else {
+										$pc = $pagina;
+									}
+									 
+									$inicio = $pc - 1;
+									$inicio = $inicio * $total_reg;
 
                                     //PESQUISAR USUÁRIOS
-                                    if (isset($s_buscar) && $c_buscar == 'Usuários') {
-                                        $verifica = $mysqli->query("SELECT * FROM pessoa WHERE NOME LIKE '%$t_buscar%'");
+                                    if (isset($q) && $tipo == 'Usuários') {
+                                        $todos = $mysqli->query("SELECT * FROM pessoa WHERE NOME LIKE '%$q%'");
+										$limite = $mysqli->query("SELECT * FROM pessoa WHERE NOME LIKE '%$q%' LIMIT $inicio,$total_reg");
+										
+										$tp = $todos->num_rows / $total_reg;
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
-                                        if ($verifica->num_rows<=0){
+                                        if ($todos->num_rows<=0){
                                             echo "Nenhum usuário encontrado. Por favor, tente novamente.";
                                             die();
                                         }        
                                         //caso tenha encontrado os dados, prossegue...
                                         else{
-                                            echo"<h1>Resultados da pesquisa de usuários para: $t_buscar</h1><br><br>
+                                            echo"<h1>Resultados da pesquisa de usuários para: $q</h1><br><br>
                                             <table> 
                                             <tr><center>
                                                 <th><center>Nome</center></th>                                    
@@ -85,7 +103,7 @@
                                                 <th><center>Data de cadastro</center></th>
                                                 <th><center>Portfólio</center></th>
                                             </center></tr>"; 
-                                            while ($row = $verifica->fetch_array(MYSQLI_ASSOC)){
+                                            while ($row = mysqli_fetch_array($limite, MYSQLI_ASSOC)){
                                                 $id = $row["ID"];
                                                 $nome = $row["NOME"];
                                                 $cpf_cnpj = $row["CPF_CNPJ"];
@@ -105,21 +123,35 @@
                                                 
                                             }
                                             echo "</table>";
+											
+											 // agora vamos criar os botões "Anterior e próximo"
+											  $anterior = $pc -1;
+											  $proximo = $pc +1;
+											  if ($pc>1) {
+											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior'><- Anterior</a> ";
+											  }
+											  echo "|";
+											  if ($pc<$tp) {
+											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo'>Próxima -></a>";
+											  }
                                         }
                                     }
 
                                     //PESQUISAR VAGAS
-                                    if (isset($s_buscar) && $c_buscar == 'Vagas') {
-                                        $verifica = $mysqli->query("SELECT * FROM vaga WHERE TITULO LIKE '%$t_buscar%' OR DESCRICAO LIKE '%$t_buscar%'");
+                                    if (isset($q) && $tipo == 'Vagas') {
+										$todos = $mysqli->query("SELECT * FROM vaga WHERE TITULO LIKE '%$q%' OR DESCRICAO LIKE '%$q%'");
+										$limite = $mysqli->query("SELECT * FROM vaga WHERE TITULO LIKE '%$q%' OR DESCRICAO LIKE '%$q%' LIMIT $inicio,$total_reg");
+										
+										$tp = $todos->num_rows / $total_reg;
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
-                                        if ($verifica->num_rows<=0){
+                                        if ($todos->num_rows<=0){
                                             echo "Nenhuma vaga encontrada. Por favor, tente novamente.";
                                             die();
                                         }        
                                         //caso tenha encontrado os dados, prossegue...
                                         else{
-                                            echo"<h1>Resultados da pesquisa de vagas para: $t_buscar</h1><br><br>
+                                            echo"<h1>Resultados da pesquisa de vagas para: $q</h1><br><br>
                                             <table> 
                                             <tr><center>
                                                 <th><center>Título</center></th>                                    
@@ -128,7 +160,7 @@
                                                 <th><center>Localizacao</center></th>
                                                 <th><center>Data de publicação</center></th>
                                             </center></tr>"; 
-                                            while ($row = $verifica->fetch_array(MYSQLI_ASSOC)){
+                                            while ($row = mysqli_fetch_array($limite, MYSQLI_ASSOC)){
                                                 $vaga_id = $row["ID"];
                                                 $vaga_titulo = $row["TITULO"];
                                                 $vaga_descricao = $row["DESCRICAO"];
@@ -147,22 +179,36 @@
                                                     <td><a href='vaga.php?id=$vaga_id'>Ver Detalhes</a></td>";                                                
                                             }
                                             echo "</table>";
+											
+											// agora vamos criar os botões "Anterior e próximo"
+											  $anterior = $pc -1;
+											  $proximo = $pc +1;
+											  if ($pc>1) {
+											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior'><- Anterior</a> ";
+											  }
+											  echo "|";
+											  if ($pc<$tp) {
+											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo'>Próxima -></a>";
+											  }
                                         }
                                     }
 
                                     //PESQUISAR PRODUTOS
-                                    if (isset($s_buscar) && $c_buscar == 'Produtos') {
-                                        $verifica = $mysqli->query("SELECT * FROM produto WHERE NOME LIKE '%$t_buscar%' OR DESCRICAO LIKE '%$t_buscar%'");
+                                    if (isset($q) && $tipo == 'Produtos') {
+										$todos = $mysqli->query("SELECT * FROM produto WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%'");
+										$limite = $mysqli->query("SELECT * FROM produto WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%' LIMIT $inicio,$total_reg");
+										
+										$tp = $todos->num_rows / $total_reg;
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
-                                        if ($verifica->num_rows<=0){
+                                        if ($todos->num_rows<=0){
                                             echo "Nenhum produto encontrado. Por favor, tente novamente.";
                                             die();
                                         }        
                                         //caso tenha encontrado os dados, prossegue...
                                         else{
-                                            echo "<h1>Resultados da pesquisa de produtos para: $t_buscar</h1><br><br>";
-                                            while ($row = $verifica->fetch_array(MYSQLI_ASSOC)){
+                                            echo "<h1>Resultados da pesquisa de produtos para: $q</h1><br><br>";
+                                            while ($row = mysqli_fetch_array($limite, MYSQLI_ASSOC)){
                                                 $id = $row["ID"];
                                                 $nome = $row["NOME"];
                                                 $descricao = $row["DESCRICAO"];
@@ -176,22 +222,36 @@
                                                     <a href='produto.php?id=$id' class='btn btn-outline btn-xl'>$nome</a><br><br>        
                                                 </div>";                                                
                                             }
+											
+											// agora vamos criar os botões "Anterior e próximo"
+											  $anterior = $pc -1;
+											  $proximo = $pc +1;
+											  if ($pc>1) {
+											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior'><- Anterior</a> ";
+											  }
+											  echo "|";
+											  if ($pc<$tp) {
+											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo'>Próxima -></a>";
+											  }
                                         }
                                     }                                         
                                     
                                     //PESQUISAR IMAGENS
-                                    if (isset($s_buscar) && $c_buscar == 'Imagens') {
-                                        $verifica = $mysqli->query("SELECT * FROM imagem WHERE NOME LIKE '%$t_buscar%' or DESCRICAO LIKE '%$t_buscar%'");
+                                    if (isset($q) && $tipo == 'Imagens') {
+                                        $todos = $mysqli->query("SELECT * FROM imagem WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%'");
+										$limite = $mysqli->query("SELECT * FROM imagem WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%' LIMIT $inicio,$total_reg");
+										
+										$tp = $todos->num_rows / $total_reg;
 
                                         //verificando se o resultado da consulta é menor ou igual a 0, ou seja, não encontrou os dados no banco
-                                        if ($verifica->num_rows<=0){
+                                        if ($todos->num_rows<=0){
                                             echo "Nenhuma imagem encontrada. Por favor, tente novamente.";
                                             die();
                                         }        
                                         //caso tenha encontrado os dados, prossegue...
                                         else{
-                                            echo "<h1>Resultados da pesquisa de imagens para: $t_buscar</h1><br><br>";
-                                            while ($row = $verifica->fetch_array(MYSQLI_ASSOC)){
+                                            echo "<h1>Resultados da pesquisa de imagens para: $q</h1><br><br>";
+                                            while ($row = mysqli_fetch_array($limite, MYSQLI_ASSOC)){
                                                 $id = $row["ID"];
                                                 $nome = $row["NOME"];
                                                 $descricao = $row["DESCRICAO"];
@@ -205,6 +265,17 @@
                                                     <a href='imagem.php?id=$id' class='btn btn-outline btn-xl'>$nome</a><br><br>        
                                                 </div>";                                                
                                             }
+											
+											// agora vamos criar os botões "Anterior e próximo"
+											  $anterior = $pc -1;
+											  $proximo = $pc +1;
+											  if ($pc>1) {
+											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior'><- Anterior</a> ";
+											  }
+											  echo "|";
+											  if ($pc<$tp) {
+											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo'>Próxima -></a>";
+											  }
                                         }
                                     }
                                 ?>
