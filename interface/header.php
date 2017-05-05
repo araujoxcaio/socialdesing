@@ -5,11 +5,16 @@
                         <div class="container">
                             <div class="apresentation">
                             <div class="col-md-4">
+							
+								<center><img class="img-responsive" src="img/gif.gif" style="height: 350px;" alt=""></center>
+							
                                 <br><a href="login.php"><img class="img-responsive" src="" alt=""></a>
-                                    <a href="login.php" class="btn btn-outline btn-xl"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a><br>        
+                                    <a href="login.php" class="btn btn-outline btn-xl"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a>        
 
-                                <br><a href="cadastro.php"><img class="img-responsive" src="" alt=""></a>
+                                <a href="cadastro.php"><img class="img-responsive" src="" alt=""></a>
                                     <a href="cadastro.php" class="btn btn-outline btn-xl"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Cadastro</a><br>
+									
+									
                             </div>
                             <div class="col-md-8">        
                                     <br> <?php include 'carousel.php';?>

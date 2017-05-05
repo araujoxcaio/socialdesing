@@ -7,11 +7,11 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+          <img class="first-slide" src="img/socialdesign002.png" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-              <p>Faça seu portfólio artístico!</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Cadastre-se agora</a></p>
+              <p style="background-color: rgba(10,23,55,0.5);">Faça seu portfólio artístico!</p>
+              <p><a class="btn btn-lg btn-primary" href="cadastro.php" role="button">Cadastre-se agora</a></p>
             </div>
           </div>
         </div>
@@ -19,17 +19,17 @@
           <img class="second-slide" src="img/socialdesign001.png" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
-              <p>Saiba mais sobre a comunidade:</p>
+              <p style="background-color: rgba(10,23,55,0.5);">Saiba mais sobre a comunidade:</p>
               <p><a class="btn btn-lg btn-primary" href="https://www.facebook.com/fsocialdesign/" role="button">Curtir!</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+          <img class="third-slide" src="img/socialdesign003.png" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-              <p>Veja os destaques:</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Novidades</a></p>
+              <p style="background-color: rgba(10,23,55,0.5);">Veja os destaques:</p>
+              <p><a class="btn btn-lg btn-primary" href="#novidades" role="button">Novidades</a></p>
             </div>
           </div>
         </div>
