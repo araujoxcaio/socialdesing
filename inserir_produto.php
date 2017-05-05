@@ -148,6 +148,7 @@
                             <div class="form-group">
                                 <label>Categoria</label>
                                 <select class="form-control" name='categoria'>
+									<option value='(Selecione uma categoria)' selected disabled>(Selecione uma categoria)</option>
                                     <option value='Arte digital'>Arte digital</option>
                                     <option value='Arte tradicional'>Arte tradicional</option>
                                     <option value='Artesanato'>Artesanato</option>
@@ -161,7 +162,9 @@
                                     <option value='Manga e Anime'>Manga e Anime</option>
                                     <option value='Personalização'>Personalização</option>
                                     <option value='Projetos Comunitários'>Projetos Comunitários</option>
+									<option value='Projetos 3D'>Projetos 3D</option>
                                     <option value='Revistas'>Revistas</option>
+									<option value='Outros'>Outros</option>
                                 </select>
 
                             </div>

@@ -81,8 +81,8 @@
 
                                     //PESQUISAR USUÁRIOS
                                     if (isset($q) && $tipo == 'Usuários') {
-                                        $todos = $mysqli->query("SELECT * FROM pessoa WHERE NOME LIKE '%$q%'");
-										$limite = $mysqli->query("SELECT * FROM pessoa WHERE NOME LIKE '%$q%' LIMIT $inicio,$total_reg");
+                                        $todos = $mysqli->query("SELECT * FROM pessoa WHERE NOME LIKE '%$q%' ORDER BY DATA_CADASTRO DESC");
+										$limite = $mysqli->query("SELECT * FROM pessoa WHERE NOME LIKE '%$q%' ORDER BY DATA_CADASTRO DESC LIMIT $inicio,$total_reg");
 										
 										$tp = $todos->num_rows / $total_reg;
 
@@ -124,23 +124,24 @@
                                             }
                                             echo "</table>";
 											
-											 // agora vamos criar os botões "Anterior e próximo"
+											echo "<div class='col-md-12' style='margin-top:20px;'>";
+											// agora vamos criar os botões "Anterior e próximo"
 											  $anterior = $pc -1;
 											  $proximo = $pc +1;
 											  if ($pc>1) {
-											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior'><- Anterior</a> ";
+											  echo "<a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior' class='btn btn-outline'><- Página Anterior</a> ";
 											  }
-											  echo "|";
 											  if ($pc<$tp) {
-											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo'>Próxima -></a>";
+											  echo "<a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo' class='btn btn-outline'>Próxima Página -></a>";
 											  }
+											echo "</div>";
                                         }
                                     }
 
                                     //PESQUISAR VAGAS
                                     if (isset($q) && $tipo == 'Vagas') {
-										$todos = $mysqli->query("SELECT * FROM vaga WHERE TITULO LIKE '%$q%' OR DESCRICAO LIKE '%$q%'");
-										$limite = $mysqli->query("SELECT * FROM vaga WHERE TITULO LIKE '%$q%' OR DESCRICAO LIKE '%$q%' LIMIT $inicio,$total_reg");
+										$todos = $mysqli->query("SELECT * FROM vaga WHERE TITULO LIKE '%$q%' OR DESCRICAO LIKE '%$q%' ORDER BY DATA_VAGA DESC");
+										$limite = $mysqli->query("SELECT * FROM vaga WHERE TITULO LIKE '%$q%' OR DESCRICAO LIKE '%$q%' ORDER BY DATA_VAGA DESC LIMIT $inicio,$total_reg");
 										
 										$tp = $todos->num_rows / $total_reg;
 
@@ -180,23 +181,24 @@
                                             }
                                             echo "</table>";
 											
+											echo "<div class='col-md-12' style='margin-top:20px;'>";
 											// agora vamos criar os botões "Anterior e próximo"
 											  $anterior = $pc -1;
 											  $proximo = $pc +1;
 											  if ($pc>1) {
-											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior'><- Anterior</a> ";
+											  echo "<a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior' class='btn btn-outline'><- Página Anterior</a> ";
 											  }
-											  echo "|";
 											  if ($pc<$tp) {
-											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo'>Próxima -></a>";
+											  echo "<a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo' class='btn btn-outline'>Próxima Página -></a>";
 											  }
+											echo "</div>";
                                         }
                                     }
 
                                     //PESQUISAR PRODUTOS
                                     if (isset($q) && $tipo == 'Produtos') {
-										$todos = $mysqli->query("SELECT * FROM produto WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%'");
-										$limite = $mysqli->query("SELECT * FROM produto WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%' LIMIT $inicio,$total_reg");
+										$todos = $mysqli->query("SELECT * FROM produto WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%' ORDER BY DATA_UPLOAD DESC");
+										$limite = $mysqli->query("SELECT * FROM produto WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%' ORDER BY DATA_UPLOAD DESC LIMIT $inicio,$total_reg");
 										
 										$tp = $todos->num_rows / $total_reg;
 
@@ -223,23 +225,24 @@
                                                 </div>";                                                
                                             }
 											
+											echo "<div class='col-md-12' style='margin-top:20px;'>";
 											// agora vamos criar os botões "Anterior e próximo"
 											  $anterior = $pc -1;
 											  $proximo = $pc +1;
 											  if ($pc>1) {
-											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior'><- Anterior</a> ";
+											  echo "<a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior' class='btn btn-outline'><- Página Anterior</a> ";
 											  }
-											  echo "|";
 											  if ($pc<$tp) {
-											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo'>Próxima -></a>";
+											  echo "<a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo' class='btn btn-outline'>Próxima Página -></a>";
 											  }
+											echo "</div>";
                                         }
                                     }                                         
                                     
                                     //PESQUISAR IMAGENS
                                     if (isset($q) && $tipo == 'Imagens') {
-                                        $todos = $mysqli->query("SELECT * FROM imagem WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%'");
-										$limite = $mysqli->query("SELECT * FROM imagem WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%' LIMIT $inicio,$total_reg");
+                                        $todos = $mysqli->query("SELECT * FROM imagem WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%' ORDER BY DATA_UPLOAD DESC");
+										$limite = $mysqli->query("SELECT * FROM imagem WHERE NOME LIKE '%$q%' OR DESCRICAO LIKE '%$q%' ORDER BY DATA_UPLOAD DESC LIMIT $inicio,$total_reg");
 										
 										$tp = $todos->num_rows / $total_reg;
 
@@ -250,7 +253,13 @@
                                         }        
                                         //caso tenha encontrado os dados, prossegue...
                                         else{
-                                            echo "<h1>Resultados da pesquisa de imagens para: $q</h1><br><br>";
+											if ($q == ''){
+												echo "<h1>Últimas imagens enviadas</a><br><br>";
+											}
+											else{
+												echo "<h1>Resultados da pesquisa de imagens para: $q</h1><br><br>";
+											}
+                                            
                                             while ($row = mysqli_fetch_array($limite, MYSQLI_ASSOC)){
                                                 $id = $row["ID"];
                                                 $nome = $row["NOME"];
@@ -265,17 +274,18 @@
                                                     <a href='imagem.php?id=$id' class='btn btn-outline btn-xl'>$nome</a><br><br>        
                                                 </div>";                                                
                                             }
-											
+
+											echo "<div class='col-md-12' style='margin-top:20px;'>";
 											// agora vamos criar os botões "Anterior e próximo"
 											  $anterior = $pc -1;
 											  $proximo = $pc +1;
 											  if ($pc>1) {
-											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior'><- Anterior</a> ";
+											  echo "<a href='pesquisa.php?q=$q&tipo=$tipo&&pagina=$anterior' class='btn btn-outline'><- Página Anterior</a> ";
 											  }
-											  echo "|";
 											  if ($pc<$tp) {
-											  echo " <a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo'>Próxima -></a>";
+											  echo "<a href='pesquisa.php?q=$q&tipo=$tipo&pagina=$proximo' class='btn btn-outline'>Próxima Página -></a>";
 											  }
+											echo "</div>";
                                         }
                                     }
                                 ?>

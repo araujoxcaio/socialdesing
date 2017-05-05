@@ -135,20 +135,22 @@
                                         <label for='Nome'>Categoria</label>
                                         <select class='form-control' name='imagem_categoria'>
                                             <option value='$imagem_categoria' selected>$imagem_categoria</option>
-                                            <option value='Arte digital'>Arte digital</option>
-                                            <option value='Arte tradicional'>Arte tradicional</option>
-                                            <option value='Artesanato'>Artesanato</option>
-                                            <option value='Cartoons & Comics'>Cartoons & Comics</option>
-                                            <option value='Concursos'>Concursos</option>
-                                            <option value='Desenhos e Interfaces'>Desenhos e Interfaces</option>
-                                            <option value='Filmes e Animações'>Filmes e Animações</option>
-                                            <option value='Fotografia'>Fotografia</option>
-                                            <option value='Literatura'>Literatura</option>
-                                            <option value='Livros de movimento'>Livros de movimento</option>
-                                            <option value='Manga e Anime'>Manga e Anime</option>
-                                            <option value='Personalização'>Personalização</option>
-                                            <option value='Projetos Comunitários'>Projetos Comunitários</option>
-                                            <option value='Revistas'>Revistas</option>
+											<option value='Arte digital'>Arte digital</option>
+											<option value='Arte tradicional'>Arte tradicional</option>
+											<option value='Artesanato'>Artesanato</option>
+											<option value='Cartoons & Comics'>Cartoons & Comics</option>
+											<option value='Concursos'>Concursos</option>
+											<option value='Desenhos e Interfaces'>Desenhos e Interfaces</option>
+											<option value='Filmes e Animações'>Filmes e Animações</option>
+											<option value='Fotografia'>Fotografia</option>
+											<option value='Literatura'>Literatura</option>
+											<option value='Livros de movimento'>Livros de movimento</option>
+											<option value='Manga e Anime'>Manga e Anime</option>
+											<option value='Personalização'>Personalização</option>
+											<option value='Projetos Comunitários'>Projetos Comunitários</option>
+											<option value='Projetos 3D'>Projetos 3D</option>
+											<option value='Revistas'>Revistas</option>
+											<option value='Outros'>Outros</option>
                                         </select>
                                     </div>
                                     
