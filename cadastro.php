@@ -21,6 +21,12 @@
         $entrar = $_POST['j_submit'];
     }
 
+    //include da biblioteca de validação e formatação de cpf e cnpj
+    include("interface/class-valida-cpf-cnpj.php");
+    
+    // Cria um objeto sobre a classe
+    $cpfcnpj = new ValidaCPFCNPJ($cpf_cnpj);
+
     if (isset($entrar)) {        
         //verificando se já existe o e-mail ou o CPF/CNPJ cadastrado no banco
         $verifica = $mysqli->query("SELECT * FROM pessoa WHERE CPF_CNPJ = '$cpf_cnpj'");
@@ -36,9 +42,13 @@
         elseif($cpf_cnpj == '' || $email == '' || $senha == ''){
             $msg = "Por favor, preencha todos os campos.";
         } 
+
+        elseif(!$cpfcnpj->valida()){
+            $msg = "Atenção: O CPF / CNPJ não é válido. Por favor, tente novamente.";
+        }
         
         //caso esteja tudo ok, insere os dados no banco
-        else{        
+        else{
             $sql = "INSERT INTO pessoa (CPF_CNPJ, FISICA_JURIDICA, EMAIL, SENHA, DATA_CADASTRO) VALUES ('$cpf_cnpj', '$fj', '$email', '$senha', NOW())";
             if($mysqli->query($sql)){
                 $msg = 'Usuário cadastrado com sucesso! Por favor, efetue login.';
@@ -132,7 +142,7 @@
                                 <label>Senha</label>
                                 <input type="password" class="form-control" name="f_senha" placeholder="Digite sua senha com no mínimo 6 caracteres" value="" minlength="6" />
                             </div>
-							Todos os campos são obrigatórios!<br><br>
+                            Todos os campos são obrigatórios!<br><br>
                             <input class="btn btn-primary" type="submit" name="f_submit" value="Cadastrar" />
                             <a href="index.php" class="btn btn-info">Voltar</a>
                         </div>
